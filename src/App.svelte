@@ -1,0 +1,17 @@
+<script lang="ts">
+	import "./App.css";
+	import { CreateList } from "./components";
+	import { Homepage } from "./layouts";
+
+	let page = 'new';
+
+	const navigate = (pageName: string): void => {
+		page = pageName;
+	}
+</script>
+
+<Homepage {navigate}>
+	{#if page === 'new'}
+		<CreateList />
+	{/if}
+</Homepage>
