@@ -1,18 +1,18 @@
 <script lang="ts">
   import { useEffect } from "../../hooks";
-  export let task: string;
-  export let deleteTask: () => void;
-  export let editTask: (content: string) => void;
+  export let item: string;
+  export let deleteItem: () => void;
+  export let editItem: (content: string) => void;
 
   let input;
   let editing = false;
-  let value = task;
+  let value = item;
   let buttonClass = '';
 
   const handleDelete = () => {
     buttonClass = 'goodbye';
     setTimeout(() => {
-      deleteTask();
+      deleteItem();
     }, 200);
   }
 
@@ -20,7 +20,7 @@
     if (!editing) return;
     const handleKeydown = (e) => {
       if ((e.code === 'Enter') && (input === document.activeElement)) {
-        editTask(value);
+        editItem(value);
         editing = false;
       }
     }
@@ -36,7 +36,7 @@
   {#if editing}
     <input type=text bind:this={input} bind:value />
   {:else}
-    <span on:click={() => { editing: true }}>{task}</span>
+    <span on:click={() => { editing: true }}>{item}</span>
   {/if}
 </li>
 

@@ -38,7 +38,7 @@
   h1 {
     color: var(--highlight-color);
     font-family: var(--header-font);
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 7rem;
     margin-bottom: 4rem;
     font-weight: 900;

@@ -1,6 +1,14 @@
 <script lang="ts">
+
   import { InputDropdown, InputCheckbox } from "..";
-  let value = 'daily';
+  import { createEventDispatcher } from "svelte";
+  import { useEffect } from "../../hooks";
+
+	const dispatch = createEventDispatcher();
+
+  let type = 'daily';
+  let days = [];
+
   const options = [
     { display: 'Daily', value: 'daily' },
     { display: 'Weekly', value: 'weekly' },
@@ -15,14 +23,38 @@
     { display: 'Sat', value: 'saturday' },
   ]
   const defaultOption = options[0];
+
+  const handleCheckboxChange = (value) => (e) => {
+    const isChecked = e.detail.value;
+    const index = days.indexOf(value);
+    const isInArray = index !== -1;
+    if (isChecked && !isInArray) {
+      days.push(value);
+    } else if (!isChecked && isInArray) {
+      days.splice(index, 1);
+    }
+  }
+
+  useEffect(() => {
+    dispatch('selectType', {
+      value: type
+    });
+  }, () => [type]);
+
+  useEffect(() => {
+    dispatch('selectDays', {
+      value: days
+    });
+  }, () => [days]);
+
 </script>
 
 <div>
-  <InputDropdown name="recurring" bind:value {options} {defaultOption} />
-  {#if value === 'weekly'}
+  <InputDropdown name="recurring" bind:value={type} {options} {defaultOption} />
+  {#if type === 'weekly'}
     <p>Every:</p>
     {#each weekOptions as { display, value }}
-      <InputCheckbox side="left" arrange="inline" name={value} label={display} />
+      <InputCheckbox side="left" arrange="inline" name={value} label={display} on:change={handleCheckboxChange(value)} />
     {/each}
   {/if}
 </div>

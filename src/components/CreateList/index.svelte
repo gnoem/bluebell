@@ -1,67 +1,80 @@
 <script lang="ts">
   import { InputCheckbox, InputText } from "..";
   import { useEffect } from "../../hooks";
-  import AddTask from "./AddTask.svelte";
-  import ListItem from "./ListItem.svelte";
+  import ListItems from "./ListItems.svelte";
   import Recurring from "./Recurring.svelte";
 
-  const defaultTasks = [];
-	let tasks: string[] = defaultTasks;
-  let addedTask: string = '';
-  
+  interface IOptions {
+    recurring: boolean;
+    recurType?: 'daily' | 'weekly' | null;
+    recurDays?: string[] | null;
+  }
+
   let listName: string = '';
+  let options: IOptions = {
+    recurring: false
+  }
+  let isRecurring: boolean;
+
+  $: isRecurring = !!options?.recurring;
+
   let nameInput: HTMLInputElement | null;
 
-  let recurring: boolean = false;
-  let checkboxInput: HTMLInputElement | null;
+  const listNameInput = (e) => {
+    listName = e.detail.value;
+  }
 
-  const handleSubmit = (): void => {
-    tasks = [...tasks, addedTask];
-    addedTask = '';
+  const setOptions = (property: string) => (e) => {
+    options[property] = e.detail.value;
   }
-  const deleteTask = (index: number) => () => {
-    tasks.splice(index, 1);
-    tasks = tasks;
-  }
-  const editTask = (index: number) => (content: string) => {
-    tasks.splice(index, 1, content);
-    tasks = tasks;
+
+  const handleSubmit = () => {
+    console.log(`
+      listName: ${listName}
+      recurring: ${isRecurring}
+      recurringoptions: ${JSON.stringify(options)}
+    `);
   }
 
   useEffect(() => {
+    if (!options.recurring) {
+      options.recurType = null;
+      options.recurDays = null;
+    }
+  }, () => [options]);
+  
+  useEffect(() => {
     nameInput?.focus();
-  }, () => [nameInput])
+  }, () => [nameInput]);
+  
 </script>
 
 <section>
   <h2>Create a new list</h2>
 
   <div class="big">
-    <InputText placeholder="My list" label="Name this list:" name="listname" bind:value={listName} createRef={(el) => { nameInput = el }} />
+    <InputText
+      placeholder="My list"
+      label="Name this list:"
+      name="listname"
+      bind:value={listName}
+      on:input={listNameInput}
+      createRef={(el) => { nameInput = el }}
+    />
   </div>
 
   <div>
-    <InputCheckbox label="Recurring?" name="recurring" bind:checked={recurring} ref={checkboxInput} />
-    {#if recurring}
-      <Recurring />
+    <InputCheckbox label="Recurring?" name="recurring" bind:checked={options.recurring} />
+    {#if isRecurring}
+      <Recurring on:selectType={setOptions('recurType')} on:selectDays={setOptions('recurDays')} />
     {/if}
   </div>
 
   <div>
-    <span class="label">Tasks:</span>
-    {#if tasks.length > 0}
-      <ul>
-        {#each tasks as task, i (task)}
-          <ListItem {task} deleteTask={deleteTask(i)} editTask={editTask(i)} />
-        {/each}
-      </ul>
-    {:else}
-      <span style="opacity: 0.6">None yet!</span>
-    {/if}
-    <AddTask bind:addedTask {handleSubmit} />
+    <ListItems />
   </div>
 
-  <button class="block" style="margin-top: 1rem">Save</button>
+  <button class="block" style="margin-top: 1rem" on:click={handleSubmit}>Save</button>
 </section>
 
 <style>
@@ -70,10 +83,6 @@
   }
   section > * {
     margin-bottom: 1.5rem;
-  }
-  ul {
-    margin: 0.5rem 0 0;
-    padding: 0;
   }
   .big {
     font-size: 1.2rem;

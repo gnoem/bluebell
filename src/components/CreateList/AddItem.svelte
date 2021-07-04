@@ -1,14 +1,14 @@
 <script lang="ts">
   import { useEffect } from "../../hooks";
-  export let addedTask: string = '';
+  export let addedItem: string = '';
   export let handleSubmit: () => void;
 
   let input: HTMLInputElement | null = null;
-  let addingTask: boolean = false;
+  let addingItem: boolean = false;
 
   const toggleInput = () => {
-    addedTask = '';
-    addingTask = !addingTask;
+    addedItem = '';
+    addingItem = !addingItem;
   }
   
   useEffect(() => {
@@ -16,8 +16,8 @@
     input.focus();
     const handleKeydown = (e) => {
       if (input !== document.activeElement) return;
-      if (addedTask.trim() && (e.code === 'Enter')) {
-        addedTask = addedTask.trim();
+      if (addedItem.trim() && (e.code === 'Enter')) {
+        addedItem = addedItem.trim();
         handleSubmit();
       }
       if (e.code === 'Escape') {
@@ -30,15 +30,15 @@
 </script>
 
 <div class="taskinput">
-  <button class={`toggle ${addingTask ? 'editing' : ''}`} on:click={toggleInput}>
+  <button class={`toggle ${addingItem ? 'editing' : ''}`} on:click={toggleInput}>
     <i class="fas fa-times" />
   </button>
-  {#if addingTask}
+  {#if addingItem}
     <div class="input">
-      <input type=text bind:value={addedTask} bind:this={input} />
+      <input type=text bind:value={addedItem} bind:this={input} />
     </div>
   {:else}
-    <button class="toggle-caption" on:click={toggleInput}>Add task</button>
+    <button class="toggle-caption" on:click={toggleInput}>Add new</button>
   {/if}
 </div>
 

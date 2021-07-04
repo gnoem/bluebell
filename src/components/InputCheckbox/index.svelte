@@ -1,11 +1,21 @@
 <script lang="ts">
+
+  import { createEventDispatcher } from "svelte";
+  import { useEffect } from "../../hooks";
+	const dispatch = createEventDispatcher();
+
   export let name: string;
   export let label: string = undefined;
   export let checked: boolean = false;
   export let arrange: string = '';
   export let side: string = 'right';
-  let checkbox: HTMLInputElement | null;
-  export let ref = checkbox;
+
+  useEffect(() => {
+    dispatch('change', {
+      value: checked
+    });
+  }, () => [checked]);
+
 </script>
 
 <div class={`input ${side} ${arrange}`}>
@@ -13,7 +23,7 @@
     <label for={name}>{label}</label>
   {/if}
   <div class="checkbox">
-    <input {name} type=checkbox bind:checked bind:this={ref} />
+    <input {name} type=checkbox bind:checked />
     <span></span>
   </div>
 </div>
