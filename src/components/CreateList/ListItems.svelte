@@ -1,29 +1,42 @@
 <script lang="ts">
   import AddItem from "./AddItem.svelte";
   import ListItem from "./ListItem.svelte";
+  import { createEventDispatcher } from "svelte";
+  import { useEffect } from "../../hooks";
 
-  const defaultItems = [];
-	let listItems: string[] = defaultItems;
+  const dispatch = createEventDispatcher();
+
+  export let listItems: string[] = [];
+
+  const defaultItems = listItems;
+	let list: string[] = defaultItems;
   let addedItem: string = '';
 
   const handleSubmit = (): void => {
-    listItems = [...listItems, addedItem];
+    list = [...list, addedItem];
     addedItem = '';
   }
   const deleteItem = (index: number) => () => {
-    listItems.splice(index, 1);
-    listItems = listItems;
+    list.splice(index, 1);
+    list = list;
   }
   const editItem = (index: number) => (content: string) => {
-    listItems.splice(index, 1, content);
-    listItems = listItems;
+    list.splice(index, 1, content);
+    list = list;
   }
+
+  useEffect(() => {
+    dispatch('update', {
+      value: list
+    });
+  }, () => [list]);
+
 </script>
 
 <span class="label">List items:</span>
-{#if listItems.length > 0}
+{#if list.length > 0}
   <ul>
-    {#each listItems as item, i (item)}
+    {#each list as item, i (item)}
       <ListItem {item} deleteItem={deleteItem(i)} editItem={editItem(i)} />
     {/each}
   </ul>

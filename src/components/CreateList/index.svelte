@@ -14,8 +14,9 @@
   let options: IOptions = {
     recurring: false
   }
-  let isRecurring: boolean;
+  let listItems: string[] = [];
 
+  let isRecurring: boolean;
   $: isRecurring = !!options?.recurring;
 
   let nameInput: HTMLInputElement | null;
@@ -28,11 +29,14 @@
     options[property] = e.detail.value;
   }
 
+  const setListItems = (e) => {
+    listItems = e.detail.value;
+  }
+
   const handleSubmit = () => {
     console.log(`
       listName: ${listName}
-      recurring: ${isRecurring}
-      recurringoptions: ${JSON.stringify(options)}
+      listItems: ${listItems.join(', ')}
     `);
   }
 
@@ -71,7 +75,7 @@
   </div>
 
   <div>
-    <ListItems />
+    <ListItems on:update={setListItems} />
   </div>
 
   <button class="block" style="margin-top: 1rem" on:click={handleSubmit}>Save</button>
