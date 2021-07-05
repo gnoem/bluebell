@@ -136,8 +136,8 @@
   "devDependencies": {},
   "scripts": {
     "client": "cd client && npm run dev",
-    "server": "cd server/app && python manage.py runserver",
-    "app": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "server": "cd server && source env/bin/activate && python app/manage.py runserver",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
