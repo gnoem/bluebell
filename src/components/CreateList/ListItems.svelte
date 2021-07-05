@@ -41,13 +41,13 @@
     {/each}
   </ul>
 {:else}
-  <span style="opacity: 0.6">None yet!</span>
+  <div class="listNote" style="opacity: 0.6">None yet!</div>
 {/if}
 <AddItem bind:addedItem {handleSubmit} />
 
 <style>
-  ul {
-    margin: 0.5rem 0 0;
+  ul, div.listNote {
+    margin: 0.75rem 0 0.5rem;
     padding: 0;
   }
 </style>

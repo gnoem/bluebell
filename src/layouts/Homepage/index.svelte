@@ -19,20 +19,28 @@
 
 <style>
   #main {
-    padding: var(--page-padding);
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template:
-      'header main' 100% / 2fr 3fr;
-    grid-gap: var(--page-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  header, main {
+    padding: var(--page-padding);
   }
   header {
-    grid-area: header;
+    position: fixed;
+    top: 0;
+    right: 60%;
+    width: 40%;
+    padding-right: 0;
     text-align: right;
   }
   main {
-    grid-area: main;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    width: 60%;
     text-align: left;
   }
   h1 {

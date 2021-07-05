@@ -38,7 +38,7 @@
       <input type=text bind:value={addedItem} bind:this={input} />
     </div>
   {:else}
-    <button class="toggle-caption" on:click={toggleInput}>Add new</button>
+    <button class="toggle-caption" on:click={toggleInput}>Add list item</button>
   {/if}
 </div>
 
