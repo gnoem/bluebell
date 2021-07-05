@@ -1,4 +1,11 @@
-/node_modules/
-/public/build/
+node_modules
+client/public/build/
 
 .DS_Store
+
+.vscode
+
+server/env
+__pycache__/
+*.py[cod]
+*$py.class
