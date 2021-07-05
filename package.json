@@ -1,8 +1,13 @@
 {
   "name": "bluebell",
   "version": "1.0.0",
-  "description": "A minimalistic web app for creating and storing lists you know you'll reuse - shopping lists, to-do lists, packing lists, etc. Built with Svelte, still super in progress. Stay tuned!",
+  "description": "A minimalistic web app for creating and storing reusable lists",
   "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && source env/bin/activate && python app/manage.py runserver",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
   "dependencies": {
     "ansi-regex": "^5.0.0",
     "ansi-styles": "^3.2.1",
@@ -134,11 +139,6 @@
     "yargs-parser": "^20.2.9"
   },
   "devDependencies": {},
-  "scripts": {
-    "client": "cd client && npm run dev",
-    "server": "cd server && source env/bin/activate && python app/manage.py runserver",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gnoem/bluebell.git"

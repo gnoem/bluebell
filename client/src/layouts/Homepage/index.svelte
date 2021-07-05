@@ -1,9 +1,9 @@
 <script lang="ts">
-  import config from "../../../apiConfig";
+  import { hostname } from "../../../apiConfig";
   export let navigate: (pageName: string) => void;
 
   const handleClick = async () => {
-    const response = await fetch(`${config.hostname}/users`);
+    const response = await fetch(`${hostname}/users`);
     const body = await response.json();
     console.log(body);
   }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { InputCheckbox, InputText } from "..";
   import { useEffect } from "../../hooks";
+  import { hostname } from "../../../apiConfig";
   import ListItems from "./ListItems.svelte";
   import Recurring from "./Recurring.svelte";
 
@@ -33,11 +34,25 @@
     listItems = e.detail.value;
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(`
       listName: ${listName}
       listItems: ${listItems.join(', ')}
     `);
+    const value = {
+      name: listName,
+      recurring: 'daily',
+      user: 2
+    }
+    const response = await fetch(`${hostname}/lists/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(value)
+    });
+    const body = await response.json();
+    console.log(body);
   }
 
   useEffect(() => {
