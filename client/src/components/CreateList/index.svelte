@@ -40,12 +40,12 @@
       listItems: ${listItems.join(', ')}
     `);
     const value = {
-      name: listName,
+      name: 'boop',
       recurring: 'daily',
       user: 2
     }
-    const response = await fetch(`${hostname}/lists/`, {
-      method: 'POST',
+    const response = await fetch(`${hostname}/lists/1/`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },

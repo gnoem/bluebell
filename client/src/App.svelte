@@ -1,6 +1,6 @@
 <script lang="ts">
 	import "./App.css";
-	import { CreateList } from "./components";
+	import { CreateList, Lists } from "./components";
 	import { Homepage } from "./layouts";
 
 	let page = 'new';
@@ -11,7 +11,9 @@
 </script>
 
 <Homepage {navigate}>
-	{#if page === 'new'}
+	{#if page === 'lists'}
+		<Lists />
+	{:else if page === 'new'}
 		<CreateList />
 	{/if}
 </Homepage>

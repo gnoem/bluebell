@@ -1,12 +1,5 @@
 <script lang="ts">
-  import { hostname } from "../../../apiConfig";
   export let navigate: (pageName: string) => void;
-
-  const handleClick = async () => {
-    const response = await fetch(`${hostname}/users`);
-    const body = await response.json();
-    console.log(body);
-  }
 </script>
 
 <div id="main">
@@ -14,7 +7,7 @@
     <h1>bluebell</h1>
     <nav>
       <button on:click={() => navigate('home')}>Home</button>
-      <button on:click={handleClick}>My lists</button>
+      <button on:click={() => navigate('lists')}>My lists</button>
       <button on:click={() => navigate('new')}>Create new list</button>
       <button on:click={() => navigate('settings')}>Settings</button>
     </nav>
