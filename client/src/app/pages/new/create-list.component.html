@@ -13,13 +13,8 @@
 <h2>create new list</h2>
 
 <div class="name">
-  <fancy-input
-    type="text"
-    name="listname"
-    label="Name this list:"
-    placeholder="My list"
-    [onChange]="setListName">
-  </fancy-input>
+  <label for="listname">Name this list:</label>
+  <input autofocus autocomplete="off" type="text" name="listname" placeholder="My list" (change)="setListName($event)" />
 </div>
 
 <div>

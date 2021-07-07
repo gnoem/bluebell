@@ -8,7 +8,7 @@ import {
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'new', loadChildren: () => import('./pages/createlist/createlist.module').then(m => m.CreateListModule) },
+  { path: 'new', loadChildren: () => import('./pages/new/create-list.module').then(m => m.CreateListModule) },
   { path: 'lists', component: ListsComponent },
   { path: 'settings', component: SettingsComponent },
 ]

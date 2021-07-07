@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { InputCheckboxComponent, InputComponent } from "src/app/shared";
+import { InputCheckboxComponent, InputDropdownComponent, InputComponent } from "src/app/shared";
+import { AutofocusDirective } from "src/app/directives";
 import { ListItemsComponent } from "./list-items";
-import { CreateListComponent } from "./createlist.component";
 import { RecurringComponent } from "./recurring";
-import { InputDropdownComponent } from "src/app/shared/inputs/input-dropdown.component";
+import { CreateListComponent } from "./create-list.component";
 
 const routes: Routes = [
   { path: '', component: CreateListComponent }, // remember to add component to declarations!
@@ -22,7 +22,8 @@ const routes: Routes = [
     InputDropdownComponent,
     RecurringComponent,
     ListItemsComponent,
-    CreateListComponent
+    CreateListComponent,
+    AutofocusDirective
   ],
   exports: [RouterModule],
 })

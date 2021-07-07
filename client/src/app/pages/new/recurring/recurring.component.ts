@@ -31,14 +31,16 @@ export class RecurringComponent {
 
   setRecurring = (value: string) => {
     this.options.recurring = value;
+    if (this.options.recurring !== 'weekly') {
+      delete this.options.details;
+    }
   }
 
   toggleRecurring = () => {
     if (this.options.recurring === 'never') {
-      this.options.recurring = 'daily';
+      this.setRecurring('daily');
     } else {
-      this.options.recurring = 'never';
-      delete this.options.details;
+      this.setRecurring('never');
     }
   }
 

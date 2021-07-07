@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-createlist',
-  templateUrl: './createlist.component.html'
+  selector: 'page-create-list',
+  templateUrl: './create-list.component.html'
 })
 
 export class CreateListComponent {
