@@ -4,7 +4,7 @@
   "description": "A minimalistic web app for creating and storing reusable lists",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && npm run dev",
+    "client": "cd client && ng serve --open",
     "server": "cd server && source env/bin/activate && python app/manage.py runserver",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },

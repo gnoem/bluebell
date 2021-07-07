@@ -5,6 +5,8 @@ client/public/build/
 
 .vscode
 
+/svelte
+
 server/env
 __pycache__/
 *.py[cod]
