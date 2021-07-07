@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout-header',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html'
 })
 
-export class HeaderComponent { }
+export class HeaderComponent {
+  constructor(private router: Router) { }
+}

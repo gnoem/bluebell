@@ -1,0 +1,65 @@
+<style>
+  div.input {
+    --checkbox-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  label {
+    margin: 0;
+    margin-right: 0.5rem;
+  }
+  div.input.left label {
+    order: 1;
+    margin: 0;
+    margin-left: 0.5rem;
+  }
+  div.input.group {
+    display: inline-flex;
+    margin-right: 1rem;
+  }
+  div.checkbox {
+    position: relative;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+  }
+  div.checkbox, div.checkbox * {
+    cursor: pointer;
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    opacity: 0;
+    margin: 0;
+  }
+  input + span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border: 1px solid #000;
+    background: #fff;
+  }
+  input + span::before {
+    font: 900 0.6em 'Font Awesome 5 Free';
+    content: '\f00c';
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+  }
+  input:checked + span::before {
+    opacity: 1;
+  }
+</style>
+
+<div class="input" [class.left]="behavior.checkboxFirst" [class.group]="behavior.group">
+  <label for="{{ name }}">{{ label }}</label>
+  <div class="checkbox">
+    <input name="{{ name }}" type="checkbox" (change)="onChange()" />
+    <span></span>
+  </div>
+</div>

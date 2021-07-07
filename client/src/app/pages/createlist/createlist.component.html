@@ -1,0 +1,33 @@
+<style>
+  :host > * + * {
+    margin-top: 1.5rem;
+  }
+  :host > button.block {
+    margin-top: 2.5rem;
+  }
+  .name {
+    font-size: 1.2rem;
+  }
+</style>
+
+<h2>create new list</h2>
+
+<div class="name">
+  <fancy-input
+    type="text"
+    name="listname"
+    label="Name this list:"
+    placeholder="My list"
+    [onChange]="setListName">
+  </fancy-input>
+</div>
+
+<div>
+  <recurring [options]="options"></recurring>
+</div>
+
+<div>
+  <list-items [listItems]="listItems"></list-items>
+</div>
+
+<button class="block" (click)="handleSubmit()">Save</button>
