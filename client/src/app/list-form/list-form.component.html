@@ -1,0 +1,24 @@
+<style>
+  :host > * + * {
+    margin-top: 1.5rem;
+  }
+  :host > button.block {
+    margin-top: 2.5rem;
+  }
+  .name {
+    font-size: 1.2rem;
+  }
+</style>
+
+<div class="name">
+  <label for="listname">Name this list:</label>
+  <input autofocus autocomplete="off" type="text" name="listname" placeholder="My list" (change)="setListName($event)" />
+</div>
+
+<div>
+  <recurring [options]="options"></recurring>
+</div>
+
+<div>
+  <list-items [listItems]="listItems"></list-items>
+</div>

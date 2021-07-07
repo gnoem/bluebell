@@ -12,11 +12,11 @@
 <input-checkbox
   name="recurring"
   label="Recurring?"
-  [checked]="options.recurring !== 'never'"
+  [checked]="options.recurring !== ''"
   [onChange]="toggleRecurring">
 </input-checkbox>
 
-<div class="options" *ngIf="options.recurring !== 'never'">
+<div class="options" *ngIf="options.recurring">
   <input-dropdown
     name="recurring"
     label="How often?"

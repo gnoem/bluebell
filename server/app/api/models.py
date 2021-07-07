@@ -11,7 +11,7 @@ class List(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   name = models.CharField(max_length=60)
   recurring = models.CharField(max_length=255)
-  listItems = models.TextField(default="")
+  members = models.TextField(default="")
 
   def __str__(self):
     return self.name

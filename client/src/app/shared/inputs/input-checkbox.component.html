@@ -54,10 +54,15 @@
   input:checked + span::before {
     opacity: 1;
   }
+  label.checklist {
+    font-size: 1em;
+    text-transform: none;
+    cursor: text;
+  }
 </style>
 
-<div class="input" [class.left]="behavior.checkboxFirst" [class.group]="behavior.group">
-  <label for="{{ name }}">{{ label }}</label>
+<div class="input" [class.left]="behavior.checkboxFirst || behavior.listItem" [class.group]="behavior.group">
+  <label for="{{ name }}" [class.checklist]="behavior.listItem">{{ label }}</label>
   <div class="checkbox">
     <input name="{{ name }}" type="checkbox" (change)="onChange()" />
     <span></span>

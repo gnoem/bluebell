@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 interface IBehavior {
-  checkboxFirst: boolean,
-  group: boolean
+  listItem?: boolean;
+  checkboxFirst?: boolean;
+  group?: boolean;
 }
 
 @Component({
@@ -16,6 +17,7 @@ export class InputCheckboxComponent {
   @Input() checked: boolean = false;
   @Input() onChange!: () => void;
   @Input() behavior: IBehavior = {
+    listItem: false,
     checkboxFirst: false,
     group: false
   }

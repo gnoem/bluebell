@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateListModule } from './pages';
-import { HeaderComponent, MainComponent } from './shared';
+import { HeaderComponent, MainComponent, SharedModule } from './shared';
 
 @NgModule({
   declarations: [
@@ -12,6 +11,7 @@ import { HeaderComponent, MainComponent } from './shared';
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [],

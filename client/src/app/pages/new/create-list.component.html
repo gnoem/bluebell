@@ -12,17 +12,6 @@
 
 <h2>create new list</h2>
 
-<div class="name">
-  <label for="listname">Name this list:</label>
-  <input autofocus autocomplete="off" type="text" name="listname" placeholder="My list" (change)="setListName($event)" />
-</div>
-
-<div>
-  <recurring [options]="options"></recurring>
-</div>
-
-<div>
-  <list-items [listItems]="listItems"></list-items>
-</div>
+<list-form></list-form>
 
 <button class="block" (click)="handleSubmit()">Save</button>

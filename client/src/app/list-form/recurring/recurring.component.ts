@@ -37,10 +37,10 @@ export class RecurringComponent {
   }
 
   toggleRecurring = () => {
-    if (this.options.recurring === 'never') {
-      this.setRecurring('daily');
+    if (this.options.recurring) {
+      this.setRecurring('');
     } else {
-      this.setRecurring('never');
+      this.setRecurring('daily');
     }
   }
 

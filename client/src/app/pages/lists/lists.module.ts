@@ -1,12 +1,13 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { SharedModule } from "src/app/shared";
-import { CreateListComponent } from "./create-list.component";
 import { ListFormModule } from "src/app/list-form/list-form.module";
+import { ListViewModule } from "src/app/list-view";
+import { SharedModule } from "src/app/shared";
+import { ListsComponent } from "./lists/lists.component";
 
 const routes: Routes = [
-  { path: '', component: CreateListComponent }, // remember to add component to declarations!
+  { path: '', component: ListsComponent }, // remember to add component to declarations!
 ]
 
 @NgModule({
@@ -14,11 +15,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     CommonModule,
-    ListFormModule
+    ListFormModule,
+    ListViewModule
   ],
   declarations: [
-    CreateListComponent
+    ListsComponent
   ],
   exports: [RouterModule],
 })
-export class CreateListModule { }
+export class ListsModule { }

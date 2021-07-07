@@ -1,0 +1,51 @@
+<style>
+  .list + .list {
+    border-top: 1px solid rgba(0, 0, 0, 0.2)
+  }
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .list > button {
+    padding: 1rem 0;
+  }
+  .list > button:first-child {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+  }
+  .list > button:last-child {
+    opacity: 0.2;
+    height: 100%;
+  }
+  .list > button:last-child:hover {
+    opacity: 0.5;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .header h2 {
+    margin-bottom: 0;
+  }
+</style>
+
+<div *ngIf="!view" class="lists">
+  <h2>my lists</h2>
+  <div class="list" *ngFor="let list of lists; index as i">
+    <button (click)="setView(list.id, 'view')">{{ list.name }}</button>
+    <button (click)="setView(list.id, 'edit')"><i class="fas fa-pen"></i></button>
+  </div>
+</div>
+
+<div *ngIf="view">
+  <div class="header">
+    <h2>{{ view.list.name }}</h2>
+    <button (click)="view = null"><i class="fas fa-arrow-left"></i></button>
+  </div>
+  <list-form *ngIf="view.mode === 'edit'"></list-form>
+  <list-view *ngIf="view.mode === 'view'" [members]="view.list.members"></list-view>
+</div>
