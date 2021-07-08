@@ -1,26 +1,50 @@
-import { Component } from '@angular/core';
-import { post } from 'src/api';
+import { Component, Input, OnInit } from '@angular/core';
+import { post, put } from 'src/api';
+import { IList } from 'src/types';
 
 @Component({
   selector: 'list-form',
   templateUrl: './list-form.component.html'
 })
 
-export class ListFormComponent {
+export class ListFormComponent implements OnInit {
+  @Input() list?: IList;
+  @Input() submitText?: string = 'Save';
+  @Input() handleResponse?: (res: any) => void;
+  @Input() onSuccess?: () => void;
+
   listName = '';
   options: {
-    recurring: '' | 'daily' | 'weekly',
-    details?: string
+    recurring: string;
+    details?: string;
   } = {
     recurring: ''
   }
   listItems: string[] = [];
 
-  setListName = (e: any) => {
+  ngOnInit() {
+    if (this.list) {
+      this.listName = this.list.name;
+      const [recurring, details] = this.list.recurring.split(':');
+      this.options.recurring = recurring ?? this.list.recurring;
+      if (recurring === 'weekly') {
+        this.options.details = details;
+      }
+      this.listItems = this.list.members.split('~&~');
+    }
+  }
+
+  setListName(e: any) {
     this.listName = e.target.value;
   }
 
-  handleSubmit = () => {
+  handleFakeSubmit = async () => {
+    return 'hi'
+  }
+
+  handleSubmit() {
+    const submit = this.list ? put : post;
+    const route = this.list ? `/lists/${this.list.id}` : `/lists`;
     const recurring = (this.options.recurring === 'weekly')
       ? `${this.options.recurring}:${this.options.details}`
       : `${this.options.recurring}`;
@@ -30,6 +54,6 @@ export class ListFormComponent {
       recurring,
       members: this.listItems.join('~&~')
     }
-    post('/lists', data);
+    submit(route, data).then(this.handleResponse);
   }
 }

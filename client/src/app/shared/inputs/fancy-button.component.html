@@ -1,0 +1,104 @@
+<style>
+  button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button > span:not(.icon) {
+    transition: 0.2s;
+  }
+  .ghost {
+    opacity: 0;
+  }
+  .icon {
+    position: absolute;
+    height: var(--button-height);
+  }
+  .icon svg {
+    width: 100%;
+    height: var(--button-height);
+  }
+  .icon svg circle {
+    stroke: #fff;
+    stroke-width: 0;
+    fill: #fff;
+    transition: 0.2s;
+    transform-origin: center;
+    opacity: 0.5;
+    animation: 1.5s pulse infinite;
+  }
+  .icon svg circle:nth-of-type(1) {
+    animation-delay: 0;
+  }
+  .icon svg circle:nth-of-type(2) {
+    animation-delay: 0.1s;
+  }
+  .icon svg circle:nth-of-type(3) {
+    animation-delay: 0.2s;
+  }
+  .icon svg path {
+    stroke-width: 0.75px;
+    stroke: #fff;
+  }
+  .icon g {
+    transform-origin: center;
+    transition: 0.5s;
+  }
+  .icon g.success,
+  .icon.success g.pending {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  .icon.success g.success {
+    animation: 0.2s 0.5s success 1 forwards;
+  }
+  .icon.success g.success.fade {
+    animation: 0.2s successFade 1 forwards;
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(0.9); }
+  }
+  @keyframes success {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+  @keyframes successFade {
+    0% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
+</style>
+
+<button class="block" (click)="handleClick()">
+  <span [class.ghost]="!!icon"><ng-content></ng-content></span>
+  <span
+    *ngIf="!!icon"
+    class="icon"
+    [class.pending]="icon === 'pending'"
+    [class.success]="icon === 'success'">
+      <svg viewBox="0 0 40 10">
+        <g class="pending">
+          <circle cx="15" cy="5" r="2"></circle>
+          <circle cx="20" cy="5" r="2"></circle>
+          <circle cx="25" cy="5" r="2"></circle>
+        </g>
+        <g class="success" [class.fade]="fade">
+          <path d="M 17 5 L 19 7 L 24 2"></path>
+        </g>
+      </svg>
+  </span>
+</button>

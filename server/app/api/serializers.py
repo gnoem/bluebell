@@ -20,4 +20,5 @@ class ListSerializer(serializers.ModelSerializer):
     instance.recurring = data.get('recurring', instance.recurring)
     instance.members = data.get('members', instance.members)
     list = instance
+    list.save()
     return list

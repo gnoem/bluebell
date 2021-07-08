@@ -32,8 +32,10 @@ export class InputDropdownComponent implements OnInit {
   width = '';
 
   ngOnInit(): void {
-    this.value = this.options[0].value;
-    this.selected = this.options.find(option => option.value === this.value) ?? this.selected;
+    // set selected once defaultOption is defined
+    this.selected = this.defaultOption;
+
+    // manually set width of dropdown box based on lengths of options
     const getWidth = () => {
       // look at all options and see whose .display property is longest
       const sortedByLength = this.options.map(({ display }) => display).sort((a, b) => {

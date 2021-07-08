@@ -3,35 +3,40 @@ import { get } from 'src/api';
 import { IList } from 'src/types';
 
 interface IView {
-  list: IList;
+  list: number;
   mode: 'view' | 'edit';
 }
 
 @Component({
   selector: 'page-lists',
-  styleUrls: ['./lists.component.css'],
   templateUrl: './lists.component.html',
   encapsulation: ViewEncapsulation.None
 })
 
 export class ListsComponent implements OnInit {
-  lists: IList[] = [];
-
+  lists: { [listId: string]: IList } = {};
   view: IView | null = null;
-  viewingList: IList | null = null;
 
   setView = (id: number, mode: 'view' | 'edit') => {
-    const selectedList = this.lists.find(list => list.id === id);
+    const selectedList = this.lists[id];
     if (!selectedList) return;
     this.view = {
-      list: selectedList,
+      list: selectedList.id,
       mode
     }
   }
 
-  ngOnInit() {
-    get('/lists').then((result) => {
-      this.lists = result;
+  fetchLists = () => {
+    get('/lists').then((result: any[]) => {
+      const lists = result.reduce((obj, list) => {
+        obj[list.id] = list;
+        return obj;
+      }, {});
+      this.lists = lists;
     }).catch(err => console.warn(err));
+  }
+
+  ngOnInit() {
+    this.fetchLists();
   }
 }

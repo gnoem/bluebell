@@ -2,7 +2,7 @@
   :host > * + * {
     margin-top: 1.5rem;
   }
-  :host > button.block {
+  :host > div.submit {
     margin-top: 2.5rem;
   }
   .name {
@@ -11,8 +11,9 @@
 </style>
 
 <div class="name">
-  <label for="listname">Name this list:</label>
-  <input autofocus autocomplete="off" type="text" name="listname" placeholder="My list" (change)="setListName($event)" />
+  <label *ngIf="list" for="listname">List name:</label>
+  <label *ngIf="!list" for="listname">Name this list:</label>
+  <input autofocus autocomplete="off" type="text" name="listname" placeholder="My list" [value]="listName" (change)="setListName($event)" />
 </div>
 
 <div>
@@ -22,3 +23,7 @@
 <div>
   <list-items [listItems]="listItems"></list-items>
 </div>
+
+<div class="submit"><fancy-button [onClick]="handleFakeSubmit">{{ submitText }}</fancy-button></div>
+
+<button class="block" (click)="handleSubmit()">actual submit</button>

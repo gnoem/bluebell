@@ -64,7 +64,7 @@
 <div class="input" [class.left]="behavior.checkboxFirst || behavior.listItem" [class.group]="behavior.group">
   <label for="{{ name }}" [class.checklist]="behavior.listItem">{{ label }}</label>
   <div class="checkbox">
-    <input name="{{ name }}" type="checkbox" (change)="onChange()" />
+    <input name="{{ name }}" type="checkbox" [checked]="checked" (change)="onChange()" />
     <span></span>
   </div>
 </div>

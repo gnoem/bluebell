@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AutofocusDirective } from "src/app/directives";
-import { InputCheckboxComponent, InputComponent, InputDropdownComponent } from "./inputs";
+import { InputCheckboxComponent, InputComponent, InputDropdownComponent, FancyButtonComponent } from "./inputs";
 
 @NgModule({
   imports: [
@@ -11,12 +11,14 @@ import { InputCheckboxComponent, InputComponent, InputDropdownComponent } from "
     InputComponent,
     InputCheckboxComponent,
     InputDropdownComponent,
+    FancyButtonComponent,
     AutofocusDirective
   ],
   exports: [
     InputComponent,
     InputCheckboxComponent,
     InputDropdownComponent,
+    FancyButtonComponent,
     AutofocusDirective
   ]
 })
