@@ -3,9 +3,10 @@ client/public/build/
 
 .DS_Store
 
-.vscode
+/.vscode
 
-/svelte
+/_svelte
+/_angular
 
 server/env
 __pycache__/
