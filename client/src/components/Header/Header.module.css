@@ -1,0 +1,58 @@
+.Header {
+  position: fixed;
+  top: 0;
+  right: var(--main-width);
+  width: var(--header-width);
+  padding-right: 0 !important;
+  text-align: right;
+}
+
+.Header h1 {
+  color: var(--highlight-color);
+  font-family: var(--header-font);
+  text-transform: lowercase;
+  font-size: 7rem;
+  margin-bottom: 4rem;
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.Header nav > button {
+  position: relative;
+  margin-bottom: 1rem;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.Header nav > button::before {
+  content: '';
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0.125rem;
+  width: 100%;
+  height: 1px;
+  background: #000;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.Header nav > button:hover {
+  -webkit-transform: skew(-15deg);
+          transform: skew(-15deg);
+}
+
+.Header nav > button:hover::before {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+}
+
+.Header nav > button + button {
+  margin-left: 4rem;
+}
+/*# sourceMappingURL=Header.module.css.map */

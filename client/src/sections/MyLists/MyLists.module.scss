@@ -1,0 +1,35 @@
+.AllLists {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.2)
+  }
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  li > button {
+    padding: 1rem 0;
+  }
+  li > button:first-child {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+  }
+  li > button:last-child {
+    opacity: 0.2;
+    height: 100%;
+  }
+  li > button:last-child:hover {
+    opacity: 0.5;
+  }
+  li > button svg {
+    height: 1rem;
+  }
+  button.block {
+    margin-top: 1.5rem;
+  }
+}

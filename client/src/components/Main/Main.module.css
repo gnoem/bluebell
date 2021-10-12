@@ -1,0 +1,8 @@
+.Main {
+  position: absolute;
+  top: 0;
+  left: var(--header-width);
+  width: var(--main-width);
+  text-align: left;
+}
+/*# sourceMappingURL=Main.module.css.map */

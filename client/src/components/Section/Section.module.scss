@@ -1,0 +1,14 @@
+.Section h2 {
+  margin-bottom: 0;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  button svg {
+    height: 1rem;
+  }
+}
