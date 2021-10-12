@@ -28,8 +28,6 @@ export interface IRawListData {
   members: string;
 }
 
-export type IListData = Omit<IRawListData, 'id'>;
-
-export interface IListsObject {
-  [id: string]: IListData;
+export interface IListData extends Omit<IRawListData, 'members'> {
+  members: string[];
 }

@@ -1,0 +1,10 @@
+.List ul {
+  padding-left: 0.5rem;
+}
+
+.List li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*# sourceMappingURL=List.module.css.map */

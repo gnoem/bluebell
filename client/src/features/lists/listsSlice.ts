@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store";
-import { IRawListData } from "../../types";
+import { IListData } from "../../types";
 import { fetchLists } from "./listsAPI";
 
 export interface ListsState {
-  value: IRawListData[];
+  value: IListData[];
   status: 'idle' | 'loading' | 'failed';
 }
 

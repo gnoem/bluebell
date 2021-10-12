@@ -1,0 +1,88 @@
+div.Input {
+  --checkbox-size: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+div.Input label {
+  margin: 0;
+  margin-right: 0.5rem;
+}
+
+div.Input div.checkbox {
+  position: relative;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+}
+
+div.Input div.checkbox, div.Input div.checkbox * {
+  cursor: pointer;
+}
+
+div.Input input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  opacity: 0;
+  margin: 0;
+}
+
+div.Input input + span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border: 1px solid #000;
+  background: #fff;
+}
+
+div.Input input + span::before {
+  font: 900 0.6em 'Font Awesome 5 Free';
+  content: '\f00c';
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+div.Input input:checked + span::before {
+  opacity: 1;
+}
+
+div.Input label.checklist {
+  font-size: 1em;
+  text-transform: none;
+  cursor: text;
+}
+
+div.Input.left label {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+div.Input.group {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-right: 1rem;
+}
+/*# sourceMappingURL=Checkbox.module.css.map */
