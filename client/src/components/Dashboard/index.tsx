@@ -1,27 +1,38 @@
 import { Header, Main, Section } from "..";
 import { useAppSelector } from "../../app/hooks";
-import { selectSection } from "../../features/navigation";
+import { selectSection, selectSectionData } from "../../features/navigation";
 import styles from "./Dashboard.module.css";
 import * as Sections from "../../sections";
-import { ISectionProps } from "../../types";
+import { ISectionProps, Obj } from "../../types";
 import { IAppSection } from "../../config";
 
 const Dashboard: React.FC = (): JSX.Element => {
   const currentSection = useAppSelector(selectSection);
+  const currentSectionData = useAppSelector(selectSectionData);
   return (
     <div className={styles.Dashboard}>
       <Header />
       <Main>
-        {loadSection(currentSection)}
+        {loadSection({
+          ...currentSection,
+          data: currentSectionData ?? {}
+        })}
       </Main>
     </div>
   )
 }
 
-const loadSection = ({ title, componentName }: IAppSection): JSX.Element | null => {
+interface ILoadSectionArgs extends IAppSection {
+  data: Obj;
+}
+
+const loadSection = ({ title, componentName, data }: ILoadSectionArgs): JSX.Element | null => {
   // @ts-ignore fixme
   const LoadedSection: React.FC<ISectionProps> = Sections[componentName] ?? FallbackSection;
-  return <LoadedSection {...{ title }} />;
+  return <LoadedSection {...{
+    title: title ?? data?.sectionTitle ?? componentName,
+    data
+  }} />;
 }
 
 const FallbackSection: React.FC<ISectionProps> = ({ title }): JSX.Element => {

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Icon, Section } from "../../components";
 import { loadListsAsync, selectLists } from "../../features/lists/listsSlice";
+import { goto } from "../../features/navigation";
 import { IRawListData, ISectionProps } from "../../types";
 import styles from "./MyLists.module.css";
 
@@ -13,12 +14,19 @@ const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
     dispatch(loadListsAsync());
   }, [dispatch]);
 
-  const createListButton = ({ id, name }: IRawListData): JSX.Element => (
-    <li key={id}>
-      <button>{name}</button>
-      <button><Icon.Pen /></button>
-    </li>
-  )
+  const createListButton = (data: IRawListData): JSX.Element => {
+    const handleClick = () => dispatch(goto({
+      componentName: 'ViewList',
+      sectionTitle: data.name,
+      data
+    }));
+    return (
+      <li key={data.id}>
+        <button onClick={handleClick}>{data.name}</button>
+        <button><Icon.Pen /></button>
+      </li>
+    )
+  }
   
   return (
     <Section title={title}>
