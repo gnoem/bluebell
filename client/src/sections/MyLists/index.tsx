@@ -15,15 +15,20 @@ const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
   }, [dispatch]);
 
   const createListButton = (data: IListData): JSX.Element => {
-    const handleClick = () => dispatch(goto({
+    const viewList = () => dispatch(goto({
       componentName: 'ViewList',
+      sectionTitle: data.name,
+      data
+    }));
+    const editList = () => dispatch(goto({
+      componentName: 'ListForm',
       sectionTitle: data.name,
       data
     }));
     return (
       <li key={data.id}>
-        <button onClick={handleClick}>{data.name}</button>
-        <button><Icon.Pen /></button>
+        <button onClick={viewList}>{data.name}</button>
+        <button onClick={editList}><Icon.Pen /></button>
       </li>
     )
   }

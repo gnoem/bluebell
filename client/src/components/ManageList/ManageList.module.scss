@@ -1,0 +1,8 @@
+.ListForm {
+  display: flex;
+  flex-direction: column;
+
+  & > div + div {
+    margin-top: 1.5rem;
+  }
+}

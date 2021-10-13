@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAC;EACR,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;CAKvB;;AAPD,AAIE,SAJO,GAIH,GAAG,GAAG,GAAG,CAAC;EACZ,UAAU,EAAE,MAAM;CACnB",
+    "sources": [
+        "ManageList.module.scss"
+    ],
+    "names": [],
+    "file": "ManageList.module.css"
+}

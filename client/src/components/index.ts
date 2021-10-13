@@ -4,5 +4,6 @@ export { default as Dashboard } from "./Dashboard";
 export { default as Header } from "./Header";
 export { default as List } from "./List";
 export { default as Main } from "./Main";
+export { default as ManageList } from "./ManageList";
 export { default as Nav } from "./Nav";
 export { default as Section } from "./Section";

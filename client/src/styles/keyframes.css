@@ -1,0 +1,32 @@
+@keyframes listInputScaleIn {
+  0% { transform: scaleX(0) }
+  100% { transform: scaleX(1) }
+}
+@keyframes listInputFadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 0.8 }
+}
+@keyframes listItemScaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    max-height: var(--list-item-height);
+  }
+}
+@keyframes listItemScaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    max-height: var(--list-item-height);
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+    max-height: 0;
+  }
+}

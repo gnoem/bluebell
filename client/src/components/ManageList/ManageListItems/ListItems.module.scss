@@ -1,0 +1,104 @@
+.ListItems {
+  ul, div.listNote {
+    margin: 0.75rem 0 0.5rem;
+    padding: 0;
+  }
+  div.listNote {
+    opacity: 0.6;
+  }
+  div.taskinput {
+    --input-height: 2rem;
+    --button-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--input-height);
+  }
+  button.toggle {
+    font-size: var(--button-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border-radius: 999px;
+    transform-origin: center;
+    transform: rotate(-45deg);
+  }
+  button.toggle.editing {
+    transform: none;
+  }
+  div.input {
+    position: relative;
+    width: 100%;
+    margin-left: 0.675rem;
+  }
+  button.toggle-caption {
+    padding-left: 0.675rem;
+  }
+  div.input::before, div.input::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
+  div.input::before {
+    content: '';
+    height: 1px;
+    background: #000;
+    transform-origin: left;
+    animation: 0.5s listInputScaleIn 1 forwards;
+  }
+  div.input::after {
+    content: 'Hit Enter to submit, Esc to cancel';
+    font-size: 0.8rem;
+    line-height: 1;
+    margin-top: 0.5rem;
+    animation: 0.5s listInputFadeIn 1 forwards;
+  }
+  input {
+    line-height: var(--input-height);
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: var(--input-height);
+    position: relative;
+  }
+  li {
+    --list-item-height: 1.5rem;
+    line-height: var(--list-item-height);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform-origin: left bottom;
+    & :global {
+      animation: 0.2s listItemScaleIn 1 forwards;
+    }
+  }
+  li.goodbye {
+    & :global {
+      animation: 0.2s listItemScaleOut 1 forwards;
+    }
+  }
+  li input, li span {
+    width: 100%;
+    text-align: left;
+  }
+  li > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.675rem;
+    button {
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  button > svg {
+    height: 0.8rem;
+  }
+}

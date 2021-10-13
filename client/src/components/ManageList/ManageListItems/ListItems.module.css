@@ -1,0 +1,154 @@
+.ListItems ul, .ListItems div.listNote {
+  margin: 0.75rem 0 0.5rem;
+  padding: 0;
+}
+
+.ListItems div.listNote {
+  opacity: 0.6;
+}
+
+.ListItems div.taskinput {
+  --input-height: 2rem;
+  --button-size: 0.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: var(--input-height);
+}
+
+.ListItems button.toggle {
+  font-size: var(--button-size);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #000;
+  border-radius: 999px;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.ListItems button.toggle.editing {
+  -webkit-transform: none;
+          transform: none;
+}
+
+.ListItems div.input {
+  position: relative;
+  width: 100%;
+  margin-left: 0.675rem;
+}
+
+.ListItems button.toggle-caption {
+  padding-left: 0.675rem;
+}
+
+.ListItems div.input::before, .ListItems div.input::after {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.ListItems div.input::before {
+  content: '';
+  height: 1px;
+  background: #000;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-animation: 0.5s listInputScaleIn 1 forwards;
+          animation: 0.5s listInputScaleIn 1 forwards;
+}
+
+.ListItems div.input::after {
+  content: 'Hit Enter to submit, Esc to cancel';
+  font-size: 0.8rem;
+  line-height: 1;
+  margin-top: 0.5rem;
+  -webkit-animation: 0.5s listInputFadeIn 1 forwards;
+          animation: 0.5s listInputFadeIn 1 forwards;
+}
+
+.ListItems input {
+  line-height: var(--input-height);
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: var(--input-height);
+  position: relative;
+}
+
+.ListItems li {
+  --list-item-height: 1.5rem;
+  line-height: var(--list-item-height);
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transform-origin: left bottom;
+          transform-origin: left bottom;
+}
+
+.ListItems li :global {
+  -webkit-animation: 0.2s listItemScaleIn 1 forwards;
+          animation: 0.2s listItemScaleIn 1 forwards;
+}
+
+.ListItems li.goodbye :global {
+  -webkit-animation: 0.2s listItemScaleOut 1 forwards;
+          animation: 0.2s listItemScaleOut 1 forwards;
+}
+
+.ListItems li input, .ListItems li span {
+  width: 100%;
+  text-align: left;
+}
+
+.ListItems li > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-right: 0.675rem;
+}
+
+.ListItems li > div button {
+  opacity: 0.5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ListItems li > div:hover {
+  opacity: 1;
+}
+
+.ListItems button > svg {
+  height: 0.8rem;
+}
+/*# sourceMappingURL=ListItems.module.css.map */

@@ -4,6 +4,10 @@ export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
+export type Writeable<T> = {
+  -readonly [P in keyof T]: T[P];
+}
+
 /**
  * create a type from T that is the same union, but with each member of the union augmented with the missing fields from all the union with the missing fields being optional and of type undefined
  * https://stackoverflow.com/questions/51889715/require-at-least-one-of-two-properties-to-be-provided-in-props
@@ -30,4 +34,9 @@ export interface IRawListData {
 
 export interface IListData extends Omit<IRawListData, 'members'> {
   members: string[];
+}
+
+export interface IInputProps {
+  name: string;
+  label: string;
 }

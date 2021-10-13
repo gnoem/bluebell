@@ -1,8 +1,7 @@
+import { IInputProps } from "../../../types";
 import styles from "./Checkbox.module.css";
 
-interface ICheckboxProps {
-  name: string;
-  label: string;
+interface ICheckboxProps extends IInputProps {
   checked?: boolean;
   onChange: () => void;
   behavior?: {
