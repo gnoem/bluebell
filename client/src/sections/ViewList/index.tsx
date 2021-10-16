@@ -1,8 +1,8 @@
-import { useAppDispatch } from "../../app/hooks";
-import { List, Section } from "../../components";
-import { IAppSection } from "../../config";
-import { goto } from "../../features/navigation";
-import { IListData } from "../../types";
+import { useAppDispatch } from "app/hooks";
+import { IAppSection } from "config";
+import { List, Section } from "components";
+import { goto } from "features/navigation";
+import { IListData } from "types";
 
 interface IViewListProps extends Required<IAppSection> {
   data: IListData;

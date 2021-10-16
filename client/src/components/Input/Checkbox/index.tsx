@@ -1,4 +1,4 @@
-import { IInputProps } from "../../../types";
+import { IInputProps } from "types";
 import styles from "./Checkbox.module.css";
 
 interface ICheckboxProps extends IInputProps {

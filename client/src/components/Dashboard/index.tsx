@@ -1,10 +1,10 @@
-import { Header, Main, Section } from "..";
-import { useAppSelector } from "../../app/hooks";
-import { selectSection, selectSectionData } from "../../features/navigation";
+import { useAppSelector } from "app/hooks";
+import { Header, Main, Section } from "components";
+import { IAppSection } from "config";
+import { selectSection, selectSectionData } from "features/navigation";
+import * as Sections from "sections";
+import { ISectionProps, Obj } from "types";
 import styles from "./Dashboard.module.css";
-import * as Sections from "../../sections";
-import { ISectionProps, Obj } from "../../types";
-import { IAppSection } from "../../config";
 
 const Dashboard: React.FC = (): JSX.Element => {
   const currentSection = useAppSelector(selectSection);

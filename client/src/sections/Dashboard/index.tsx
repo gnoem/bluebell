@@ -1,5 +1,5 @@
-import { Section } from "../../components";
-import { ISectionProps } from "../../types";
+import { Section } from "components";
+import { ISectionProps } from "types";
 
 const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
   return (

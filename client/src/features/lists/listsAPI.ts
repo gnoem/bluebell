@@ -1,5 +1,5 @@
-import { get } from "../../api";
-import { IRawListData } from "../../types";
+import { get } from "api";
+import { IRawListData } from "types";
 
 export const fetchLists = async () => {
   const lists: IRawListData[] = await get('/lists');

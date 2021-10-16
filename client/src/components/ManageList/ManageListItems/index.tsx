@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ListItemData } from "..";
-import { Icon } from "../..";
+import { Icon } from "components";
+import { ListItemData } from "components/ManageList";
 import styles from "./ListItems.module.css";
 
 interface IListItemsProps {

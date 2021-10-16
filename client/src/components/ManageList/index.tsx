@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import styles from "./ManageList.module.css";
-import { IListData, IRecurringData } from "../../types";
-import { Input } from "..";
+import { Input } from "components";
+import { IListData, IRecurringData } from "types";
+import { newObjectFrom } from "utils";
 import ManageListItems from "./ManageListItems";
-import { newObjectFrom } from "../../utils";
 import ManageRecurring from "./ManageRecurring";
+import styles from "./ManageList.module.css";
 
 export type ListItemData = [number, string];
 

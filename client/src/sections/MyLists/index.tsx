@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Icon, Section } from "../../components";
-import { loadListsAsync, selectLists } from "../../features/lists/listsSlice";
-import { goto } from "../../features/navigation";
-import { IListData, ISectionProps } from "../../types";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { Icon, Section } from "components";
+import { loadListsAsync, selectLists } from "features/lists";
+import { goto } from "features/navigation";
+import { IListData, ISectionProps } from "types";
 import styles from "./MyLists.module.css";
 
 const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {

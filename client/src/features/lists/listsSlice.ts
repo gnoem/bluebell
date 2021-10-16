@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { RootState } from "../../app/store";
-import { IListData } from "../../types";
+import { RootState } from "app/store";
+import { IListData } from "types";
 import { fetchLists } from "./listsAPI";
 
 export interface ListsState {

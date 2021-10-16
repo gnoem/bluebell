@@ -1,8 +1,8 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { IManageListData } from "..";
-import { Input } from "../..";
-import { IRecurringData } from "../../../types";
-import { newObjectFrom } from "../../../utils";
+import { Input } from "components";
+import { IManageListData } from "components/ManageList";
+import { IRecurringData } from "types";
+import { newObjectFrom } from "utils";
 import styles from "../ManageList.module.css";
 
 const weekOptionValues = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];

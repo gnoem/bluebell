@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { IInputProps } from "../../../types";
+import { IInputProps } from "types";
 
 interface IGenericInputProps extends IInputProps {
   type: "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" | "submit" | "tel" | "text" | "time" | "url" | "week";

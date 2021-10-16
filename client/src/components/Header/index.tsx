@@ -1,4 +1,4 @@
-import { SiteNav } from "../../features/navigation";
+import { SiteNav } from "features/navigation";
 import styles from "./Header.module.css";
 
 const Header: React.FC = (): JSX.Element => {

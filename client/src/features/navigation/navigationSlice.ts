@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState } from "../../app/store";
-import { mainAppSections, getSectionByComponentName, IAppSection } from "../../config";
-import { Obj } from "../../types";
+import { RootState } from "app/store";
+import { mainAppSections, getSectionByComponentName, IAppSection } from "config";
+import { Obj } from "types";
 
 export interface NavigationState {
   value: IAppSection;

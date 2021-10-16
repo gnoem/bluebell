@@ -1,4 +1,4 @@
-import { RequiredBy } from "../types";
+import { RequiredBy } from "types";
 
 export interface IAppSection {
   title?: string;

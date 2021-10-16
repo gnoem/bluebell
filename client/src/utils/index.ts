@@ -1,4 +1,4 @@
-import { Obj, Writeable } from "../types";
+import { Obj, Writeable } from "types";
 
 /**
  * setState callback generator for updating arrays held in React state

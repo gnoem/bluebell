@@ -1,5 +1,5 @@
-import { Input } from "..";
-import { IListData } from "../../types";
+import { Input } from "components";
+import { IListData } from "types";
 import styles from "./List.module.css";
 
 const List: React.FC<IListData> = ({ members }) => {

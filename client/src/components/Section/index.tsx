@@ -1,5 +1,5 @@
-import { Icon } from "..";
-import { ISectionProps } from "../../types";
+import { Icon } from "components";
+import { ISectionProps } from "types";
 import styles from "./Section.module.css";
 
 const Section: React.FC<ISectionProps> = ({ title, goBack, children }): JSX.Element => {

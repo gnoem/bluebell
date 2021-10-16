@@ -1,8 +1,8 @@
-import { useAppDispatch } from "../../app/hooks";
-import { ManageList, Section } from "../../components";
-import { IManageListProps } from "../../components/ManageList";
-import { goto } from "../../features/navigation";
-import { ISectionProps } from "../../types";
+import { useAppDispatch } from "app/hooks";
+import { ManageList, Section } from "components";
+import { IManageListProps } from "components/ManageList";
+import { goto } from "features/navigation";
+import { ISectionProps } from "types";
 
 interface IListFormProps extends ISectionProps {
   data: IManageListProps;
