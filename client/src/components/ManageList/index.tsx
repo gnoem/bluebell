@@ -47,7 +47,7 @@ const convertRecurring = (recurring: string): IRecurringData => {
     ...defaultRecurringOptions
   }
   const recurringType = recurring.split(':')[0];
-  const recurringDays = recurring.split(':')[1]?.split('&');
+  const recurringDays = recurring.split(':')[1]?.split('&') ?? [];
   return {
     isRecurring: true,
     type: recurringType,
