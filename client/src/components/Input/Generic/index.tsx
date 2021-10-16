@@ -17,7 +17,7 @@ const Generic: React.FC<IGenericInputProps> = ({ type, name, label, onChange, au
   return (
     <div>
       <label htmlFor={name}>{label}</label>
-      <input ref={inputRef} type={type} onChange={onChange} autoComplete="off" {...elementProps} />
+      <input ref={inputRef} name={name} type={type} onChange={onChange} autoComplete="off" {...elementProps} />
     </div>
   )
 }

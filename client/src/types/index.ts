@@ -40,3 +40,14 @@ export interface IInputProps {
   name: string;
   label: string;
 }
+
+export interface IDropdownOption<T, K> {
+  value: T;
+  display: K;
+}
+
+export interface IRecurringData {
+  isRecurring: boolean;
+  type: string;
+  onDays: string[];
+}

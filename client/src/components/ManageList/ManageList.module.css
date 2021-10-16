@@ -11,4 +11,10 @@
 .ListForm > div + div {
   margin-top: 1.5rem;
 }
+
+.ListForm .recurringOptions {
+  margin: 0.75rem 0;
+  padding-left: 1rem;
+  border-left: 1px solid #000;
+}
 /*# sourceMappingURL=ManageList.module.css.map */

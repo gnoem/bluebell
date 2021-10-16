@@ -3,7 +3,7 @@ import styles from "./Checkbox.module.css";
 
 interface ICheckboxProps extends IInputProps {
   checked?: boolean;
-  onChange: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   behavior?: {
     checkboxFirst?: boolean;
     listItem?: boolean;
@@ -11,13 +11,13 @@ interface ICheckboxProps extends IInputProps {
   }
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({ behavior, name, label, checked, onChange }): JSX.Element => {
+const Checkbox: React.FC<ICheckboxProps> = ({ behavior, name, label, onChange, ...checkboxProps }): JSX.Element => {
   const { checkboxFirst, listItem, group } = behavior ?? {};
   return (
     <div className={`${styles.Input} ${(checkboxFirst || listItem) ? styles.left : ''} ${group ? styles.group : ''}`}>
       <label className={`${listItem ? styles.checklist : ''}`} htmlFor={name}>{label}</label>
       <div className={styles.checkbox}>
-        <input name="{{ name }}" type="checkbox" checked={checked} onChange={onChange} />
+        <input name="{{ name }}" type="checkbox" onChange={onChange} {...checkboxProps} />
         <span></span>
       </div>
     </div>

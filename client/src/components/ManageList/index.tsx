@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./ManageList.module.css";
-import { IListData } from "../../types";
+import { IListData, IRecurringData } from "../../types";
 import { Input } from "..";
 import ManageListItems from "./ManageListItems";
 import { newObjectFrom } from "../../utils";
+import ManageRecurring from "./ManageRecurring";
 
 export type ListItemData = [number, string];
 
@@ -15,7 +16,7 @@ export interface IManageListProps {
   members?: string[];
 }
 
-interface IManageListData extends Omit<IListData, 'id' | 'members'> {
+export interface IManageListData extends Omit<IListData, 'id' | 'members'> {
   members: ListItemData[];
   id: number | null;
 }
@@ -36,6 +37,24 @@ const getTrackableListItemsArray = (array: string[]): ListItemData[] => {
   return updatedList;
 }
 
+const convertRecurring = (recurring: string): IRecurringData => {
+  const defaultRecurringOptions = {
+    type: 'daily',
+    onDays: []
+  }
+  if (!recurring) return {
+    isRecurring: false,
+    ...defaultRecurringOptions
+  }
+  const recurringType = recurring.split(':')[0];
+  const recurringDays = recurring.split(':')[1]?.split('&');
+  return {
+    isRecurring: true,
+    type: recurringType,
+    onDays: recurringDays
+  }
+}
+
 const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, members }): JSX.Element => {
   const creatingNew = !id;
   const [formData, setFormData] = useState<IManageListData>({
@@ -45,6 +64,10 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
     recurring: recurring ?? '',
     members: members ? getTrackableListItemsArray(members) : []
   });
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData(prevState => ({
@@ -70,6 +93,10 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
     }));
   }
 
+  const convertedRecurring = useMemo(() => {
+    return convertRecurring(formData.recurring);
+  }, [formData.recurring]);
+
   return (
     <div className={styles.ListForm}>
       <div style={{ fontSize: '1.2rem' }}>
@@ -83,6 +110,10 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
           autoFocus={!!creatingNew}
         />
       </div>
+      <ManageRecurring
+        recurring={convertedRecurring}
+        setFormData={setFormData}
+      />
       <ManageListItems
         {...{
           addListItem,
