@@ -1,6 +1,6 @@
 import React, { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { Input } from "components";
-import { IManageListData } from "components/ManageList";
+import { IManageListData } from "../utils";
 import { IRecurringData, IRecurringInterval } from "types";
 import { createDropdownOptions, newObjectFrom } from "utils";
 import styles from "../ManageList.module.css";

@@ -1,15 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Icon } from "components";
-import { ListItemData } from "components/ManageList";
+import { newObjectFrom } from "utils";
+import { getListItemLabels, getTrackableListItemsArray, IManageListData, ListItemData } from "../utils";
 import styles from "./ListItems.module.css";
 
-interface IListItemsProps {
-  addListItem: (listItem: string) => void;
-  removeListItem: (listItem: ListItemData) => void;
+interface IManageListItemsProps {
+  setFormData: React.Dispatch<SetStateAction<IManageListData>>;
   members: ListItemData[];
 }
 
-const ManageListItems: React.FC<IListItemsProps> = ({ addListItem, removeListItem, members }): JSX.Element => {
+const ManageListItems: React.FC<IManageListItemsProps> = ({ setFormData, members }): JSX.Element => {
+  const addListItem = (label: string): void => {
+    setFormData(newObjectFrom<IManageListData>(formData => {
+      const updatedMembers = getListItemLabels([...formData.members]);
+      updatedMembers.push(label);
+      formData.members = getTrackableListItemsArray(updatedMembers);
+    }));
+  }
+
+  const removeListItem = ([itemPrefix, itemLabel]: ListItemData): void => {
+    setFormData(newObjectFrom<IManageListData>(formData => {
+      const index = formData.members.findIndex(([prefix, label]) => (prefix === itemPrefix) && (label === itemLabel));
+      const updatedMembers = getListItemLabels([...formData.members]);
+      updatedMembers.splice(index, 1);
+      formData.members = getTrackableListItemsArray(updatedMembers);
+    }));
+  }
   return (
     <div className={styles.ListItems}>
       <span className="label">List items:</span>
@@ -19,7 +35,11 @@ const ManageListItems: React.FC<IListItemsProps> = ({ addListItem, removeListIte
   )
 }
 
-const ListItems: React.FC<Omit<IListItemsProps, 'addListItem'>> = ({ removeListItem, members }): JSX.Element => {
+interface IListItemsProps extends Pick<IManageListItemsProps, 'members'> {
+  removeListItem: (item: ListItemData) => void;
+}
+
+const ListItems: React.FC<IListItemsProps> = ({ removeListItem, members }): JSX.Element => {
   const listItemRefs = useRef<{ [id: string]: (HTMLLIElement | null) }>({});
   if (members.length < 1) return <div className={styles.listNote}>None yet!</div>;
   const getUniqueIdentifier = (listItem: ListItemData): string => listItem.join(':');
@@ -46,7 +66,7 @@ const ListItems: React.FC<Omit<IListItemsProps, 'addListItem'>> = ({ removeListI
   )
 }
 
-const AddListItem: React.FC<Pick<IListItemsProps, 'addListItem'>> = ({ addListItem }): JSX.Element => {
+const AddListItem: React.FC<{ addListItem: (label: string) => void; }> = ({ addListItem }): JSX.Element => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [editing, setEditing] = useState<boolean>(false);
   const toggleEditing = () => setEditing(x => !x);

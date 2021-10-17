@@ -1,6 +1,13 @@
 import { IDropdownOption, Obj, Writeable } from "types";
 
 /**
+ * Turns 1 into '01', 2 into '02', ... 9 into '09'
+ * @param num a number between 0 and 9, inclusive
+ * @returns the stringified number with a zero placed at the beginning
+ */
+export const getTwoDigitString = (num: number) => (num < 10) ? `0${num}` : `${num}`;
+
+/**
  * setState callback generator for updating arrays held in React state
  * @param update what function to perform on the array
  * @returns setState callback function

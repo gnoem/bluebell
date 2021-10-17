@@ -1,6 +1,6 @@
 import { useAppDispatch } from "app/hooks";
 import { ManageList, Section } from "components";
-import { IManageListProps } from "components/ManageList";
+import { IManageListProps } from "components/ManageList/utils";
 import { goto } from "features/navigation";
 import { ISectionProps } from "types";
 
