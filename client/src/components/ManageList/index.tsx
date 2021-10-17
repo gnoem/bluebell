@@ -109,6 +109,14 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
     }));
   }
 
+  const test = () => {
+    return new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  }
+
   const convertedRecurring = useMemo(() => {
     return convertRecurring(formData.recurring);
   }, [formData.recurring]);
@@ -137,6 +145,7 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
           members: formData.members
         }}
       />
+      <Input.Submit onClick={test}>Save changes</Input.Submit>
     </div>
   )
 }

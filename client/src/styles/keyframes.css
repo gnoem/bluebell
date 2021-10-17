@@ -30,3 +30,28 @@
     max-height: 0;
   }
 }
+
+/* submit buttons pending/success */
+@keyframes pulse {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(0.6); }
+}
+@keyframes success {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  90% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}

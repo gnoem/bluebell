@@ -17,11 +17,12 @@ interface IDropdownProps {
 
 const calculateOptimalDropdownWidth = (dropdownOptions: IDropdownOption[]) => {
   const chPerCharacter = 1.5;
+  const paddingRight = 2;
   const getLongestStringsLength = (x: string[]) => Math.max(...(x.map(el => el.length)));
   const displays = dropdownOptions.map(option => option.display);
   // go through all displays and find the one that's longest
   const longestDisplayLength = getLongestStringsLength(displays);
-  return `${Math.round(longestDisplayLength * chPerCharacter)}ch`;
+  return `${Math.round(longestDisplayLength * chPerCharacter) + paddingRight}ch`;
 }
 
 const Dropdown: React.FC<IDropdownProps> = ({ name, label, dropdownOptions, defaultOption, handleChange, width, behavior, style }): JSX.Element => {

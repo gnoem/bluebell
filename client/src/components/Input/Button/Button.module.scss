@@ -1,0 +1,13 @@
+.Button {
+  button {
+    --button-height: 2.25rem;
+    display: inline-block;
+    width: auto;
+    padding: 0 1.5rem;
+    background: #000;
+    color: #fff;
+    font-size: 0.875rem;
+    line-height: var(--button-height);
+    position: relative;
+  }
+}

@@ -87,18 +87,6 @@ button::before, button::after, input[type=submit]::before, input[type=submit]::a
   transition: 0.2s;
 }
 
-button.block {
-  --button-height: 2.25rem;
-  display: inline-block;
-  width: auto;
-  padding: 0 1.5rem;
-  background: #000;
-  color: #fff;
-  font-size: 0.875rem;
-  line-height: var(--button-height);
-  position: relative;
-}
-
 label, span.label {
   display: block;
   text-align: left;
