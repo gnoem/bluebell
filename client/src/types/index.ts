@@ -32,8 +32,9 @@ export interface IRawListData {
   members: string;
 }
 
-export interface IListData extends Omit<IRawListData, 'members'> {
+export interface IListData extends Omit<IRawListData, 'members' | 'recurring'> {
   members: string[];
+  recurring: IRecurringData;
 }
 
 export interface IInputProps {

@@ -1,11 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "components";
-import { IListData, IRecurringData } from "types";
-import { newObjectFrom } from "utils";
 import ManageListItems from "./ManageListItems";
 import ManageRecurring from "./ManageRecurring";
 import styles from "./ManageList.module.css";
-import { convertRecurringStringToObject, getListItemLabels, getTrackableListItemsArray, IManageListData, IManageListProps, ListItemData } from "./utils";
+import { defaultRecurringOptions, IManageListData, IManageListProps, convertListItemsArrayToString, convertRecurringObjectToString } from "./utils";
 
 /*
 JSON.stringify recurring and members on push/submit
@@ -18,8 +16,8 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
     user,
     id: id ?? null,
     name: name ?? '',
-    recurring: recurring ?? '',
-    members: members ? getTrackableListItemsArray(members) : []
+    recurring: recurring ?? defaultRecurringOptions,
+    members: members ?? []
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,15 +30,16 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
   const handleSubmit = () => {
     return new Promise<void>((resolve, reject) => {
       setTimeout(() => {
-        console.log(formData);
+        const data = {
+          ...formData,
+          members: convertListItemsArrayToString(formData.members),
+          recurring: convertRecurringObjectToString(formData.recurring)
+        }
+        console.log(data);
         resolve();
       }, 2000);
     });
   }
-
-  const convertedRecurring = useMemo(() => {
-    return convertRecurringStringToObject(formData.recurring);
-  }, [formData.recurring]);
 
   return (
     <div className={styles.ListForm}>
@@ -56,14 +55,12 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
         />
       </div>
       <ManageRecurring
-        recurring={convertedRecurring}
+        recurring={formData.recurring}
         setFormData={setFormData}
       />
       <ManageListItems
-        {...{
-          members: formData.members,
-          setFormData
-        }}
+        members={formData.members}
+        setFormData={setFormData}
       />
       <Input.Submit onClick={handleSubmit}>Save changes</Input.Submit>
     </div>

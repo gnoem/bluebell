@@ -1,47 +1,57 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Icon } from "components";
-import { newObjectFrom } from "utils";
-import { getListItemLabels, getTrackableListItemsArray, IManageListData, ListItemData } from "../utils";
+import { newArrayFrom, newObjectFrom } from "utils";
+import { convertListItemsArrayToTrackableList, convertTrackableListToStringArray, getListItemLabels, getTrackableListItemsArray, IManageListData, ListItemData } from "../utils";
 import styles from "./ListItems.module.css";
 
 interface IManageListItemsProps {
   setFormData: React.Dispatch<SetStateAction<IManageListData>>;
-  members: ListItemData[];
+  members: string[];
 }
 
 const ManageListItems: React.FC<IManageListItemsProps> = ({ setFormData, members }): JSX.Element => {
+  const [listItems, setListItems] = useState<ListItemData[]>(convertListItemsArrayToTrackableList(members));
+
   const addListItem = (label: string): void => {
-    setFormData(newObjectFrom<IManageListData>(formData => {
-      const updatedMembers = getListItemLabels([...formData.members]);
-      updatedMembers.push(label);
-      formData.members = getTrackableListItemsArray(updatedMembers);
+    setListItems(newArrayFrom<ListItemData>(listItems => {
+      const labels = convertTrackableListToStringArray(listItems);
+      labels.push(label);
+      listItems = convertListItemsArrayToTrackableList(labels);
     }));
   }
 
   const removeListItem = ([itemPrefix, itemLabel]: ListItemData): void => {
-    setFormData(newObjectFrom<IManageListData>(formData => {
-      const index = formData.members.findIndex(([prefix, label]) => (prefix === itemPrefix) && (label === itemLabel));
-      const updatedMembers = getListItemLabels([...formData.members]);
-      updatedMembers.splice(index, 1);
-      formData.members = getTrackableListItemsArray(updatedMembers);
+    setListItems(newArrayFrom<ListItemData>(listItems => {
+      const index = listItems.findIndex(([prefix, label]) => (prefix === itemPrefix) && (label === itemLabel));
+      const labels = convertTrackableListToStringArray(listItems);
+      labels.splice(index, 1);
+      listItems = convertListItemsArrayToTrackableList(labels);
     }));
   }
+
+  useEffect(() => {
+    setFormData(newObjectFrom<IManageListData>(formData => {
+      formData.members = convertTrackableListToStringArray(listItems);
+    }));
+  }, [listItems]);
+
   return (
     <div className={styles.ListItems}>
       <span className="label">List items:</span>
-      <ListItems {...{ removeListItem, members }} />
+      <ListItems {...{ removeListItem, listItems }} />
       <AddListItem {...{ addListItem }} />
     </div>
   )
 }
 
-interface IListItemsProps extends Pick<IManageListItemsProps, 'members'> {
+interface IListItemsProps {
+  listItems: ListItemData[];
   removeListItem: (item: ListItemData) => void;
 }
 
-const ListItems: React.FC<IListItemsProps> = ({ removeListItem, members }): JSX.Element => {
+const ListItems: React.FC<IListItemsProps> = ({ removeListItem, listItems }): JSX.Element => {
   const listItemRefs = useRef<{ [id: string]: (HTMLLIElement | null) }>({});
-  if (members.length < 1) return <div className={styles.listNote}>None yet!</div>;
+  if (listItems.length < 1) return <div className={styles.listNote}>None yet!</div>;
   const getUniqueIdentifier = (listItem: ListItemData): string => listItem.join(':');
   const vanishListItem = (listItem: ListItemData): void => {
     listItemRefs.current[getUniqueIdentifier(listItem)]?.classList.add(styles.goodbye);
@@ -61,7 +71,7 @@ const ListItems: React.FC<IListItemsProps> = ({ removeListItem, members }): JSX.
   }
   return (
     <ul>
-      {members.map(createListItem)}
+      {listItems.map(createListItem)}
     </ul>
   )
 }

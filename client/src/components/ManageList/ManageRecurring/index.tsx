@@ -34,16 +34,9 @@ const ManageRecurring: React.FC<IManageRecurringProps> = (props): JSX.Element =>
 
   // update form data anytime recurring changes in local state
   useEffect(() => {
-    const updateFormData = (value: IRecurringData): void => {
-      const convertToString = ({ isRecurring, type, onDays, onInterval }: IRecurringData): string => {
-        if (!isRecurring) return '';
-        return `${type}:${onDays.join('&')}:${onInterval.every}&${onInterval.type}&${onInterval.startingOn}`;
-      }
-      props.setFormData(newObjectFrom<IManageListData>(formData => {
-        formData.recurring = convertToString(value);
-      }));
-    }
-    updateFormData(recurring);
+    props.setFormData(newObjectFrom<IManageListData>(formData => {
+      formData.recurring = recurring;
+    }));
   }, [recurring.isRecurring, recurring.type, recurring.onDays, recurring.onInterval]);
   
   return (

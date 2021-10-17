@@ -8,6 +8,13 @@ import { IDropdownOption, Obj, Writeable } from "types";
 export const getTwoDigitString = (num: number) => (num < 10) ? `0${num}` : `${num}`;
 
 /**
+ * Get a date string in 'YYYY-MM-DD' form
+ * @param day a date object
+ * @returns date in 'YYYY-MM-DD' form
+ */
+export const getDateString = (day: Date) => `${day.getFullYear()}-${getTwoDigitString(day.getMonth() + 1)}-${getTwoDigitString(day.getDate())}`;
+
+/**
  * setState callback generator for updating arrays held in React state
  * @param update what function to perform on the array
  * @returns setState callback function
