@@ -62,7 +62,9 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
         members={formData.members}
         setFormData={setFormData}
       />
-      <Input.Submit onClick={handleSubmit}>Save changes</Input.Submit>
+      <div style={{ marginTop: '2.5rem' }}>
+        <Input.Submit onClick={handleSubmit}>Save changes</Input.Submit>
+      </div>
     </div>
   )
 }

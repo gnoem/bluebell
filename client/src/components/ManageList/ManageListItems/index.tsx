@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Icon } from "components";
 import { newArrayFrom, newObjectFrom } from "utils";
-import { convertListItemsArrayToTrackableList, convertTrackableListToStringArray, getListItemLabels, getTrackableListItemsArray, IManageListData, ListItemData } from "../utils";
+import { convertListItemsArrayToTrackableList, convertTrackableListToStringArray, IManageListData, ListItemData } from "../utils";
 import styles from "./ListItems.module.css";
 
 interface IManageListItemsProps {
@@ -16,7 +16,7 @@ const ManageListItems: React.FC<IManageListItemsProps> = ({ setFormData, members
     setListItems(newArrayFrom<ListItemData>(listItems => {
       const labels = convertTrackableListToStringArray(listItems);
       labels.push(label);
-      listItems = convertListItemsArrayToTrackableList(labels);
+      return convertListItemsArrayToTrackableList(labels);
     }));
   }
 
@@ -25,7 +25,7 @@ const ManageListItems: React.FC<IManageListItemsProps> = ({ setFormData, members
       const index = listItems.findIndex(([prefix, label]) => (prefix === itemPrefix) && (label === itemLabel));
       const labels = convertTrackableListToStringArray(listItems);
       labels.splice(index, 1);
-      listItems = convertListItemsArrayToTrackableList(labels);
+      return convertListItemsArrayToTrackableList(labels);
     }));
   }
 

@@ -19,10 +19,14 @@ export const getDateString = (day: Date) => `${day.getFullYear()}-${getTwoDigitS
  * @param update what function to perform on the array
  * @returns setState callback function
  */
- export const newArrayFrom = <T extends unknown>(update: (array: T[]) => void) => (prevArray: T[]): T[] => {
-  const arrayToReturn = [...prevArray];
-  update(arrayToReturn);
-  return arrayToReturn;
+ export const newArrayFrom = <T extends unknown>(update: (array: T[]) => (T[] | void)) => (prevArray: T[]): T[] => {
+  let arrayToReturn = [...prevArray];
+  const returnedValue = update(arrayToReturn); 
+  /**
+   * update() may simply modify the arrayToReturn (e.g. via push()/splice() etc.) without returning anything, in which case returnedValue will be undefined,
+   * or it may return a new array
+   */
+  return (typeof returnedValue === 'undefined') ? arrayToReturn : returnedValue;
 }
 
 /**

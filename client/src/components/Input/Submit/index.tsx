@@ -13,26 +13,33 @@ const successAnimationDuration = 3000;
 
 const Submit: React.FC<ISubmitProps> = ({ onClick, children }): JSX.Element => {
   const [status, setStatus] = useState<Status>('idle');
+
   const handleClick = () => {
     if (status !== 'pending') {
       setStatus('pending');
     }
   }
+
   useEffect(() => {
+    let mounted = true;
     if (status === 'pending') {
       onClick().then(() => {
-        setStatus('success');
+        if (mounted) setStatus('success');
       }).catch(err => {
-        setStatus('idle');
+        if (mounted) setStatus('idle');
         console.error(err);
       });
     }
     if (status === 'success') {
       setTimeout(() => {
-        setStatus('idle');
-      }, successAnimationDuration);
+        if (mounted) setStatus('idle');
+      }, successAnimationDuration)
+    }
+    return () => {
+      mounted = false;
     }
   }, [status]);
+  
   return (
     <Input.Button onClick={handleClick}>
       <span className={`${(status === 'idle') ? '' : styles.ghost}`}>{children}</span>
