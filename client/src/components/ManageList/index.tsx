@@ -37,21 +37,37 @@ const getTrackableListItemsArray = (array: string[]): ListItemData[] => {
   return updatedList;
 }
 
+const makeTwoDigits = (num: number) => (num < 10) ? `0${num}` : `${num}`;
+
 const convertRecurring = (recurring: string): IRecurringData => {
+  // example string: 'interval:sun&wed:3&days&2021-10-18';
+  const getTodayString = (today: Date) => `${today.getFullYear()}-${makeTwoDigits(today.getMonth() + 1)}-${makeTwoDigits(today.getDate())}`;
+  const defaultIntervalOptions = {
+    every: '3',
+    type: 'days',
+    startingOn: getTodayString(new Date())
+  }
   const defaultRecurringOptions = {
     type: 'daily',
-    onDays: []
+    onDays: [],
+    onInterval: defaultIntervalOptions
   }
   if (!recurring) return {
     isRecurring: false,
     ...defaultRecurringOptions
   }
-  const recurringType = recurring.split(':')[0];
-  const recurringDays = recurring.split(':')[1]?.split('&') ?? [];
+  const [recurringType, recurringDaysString, recurringIntervalString] = recurring.split(':');
+  const onDays = recurringDaysString?.split('&') ?? [];
+  const [every, intervalType, startingOn] = recurringIntervalString?.split('&') ?? Object.values(defaultIntervalOptions);
   return {
     isRecurring: true,
     type: recurringType,
-    onDays: recurringDays
+    onDays,
+    onInterval: {
+      every,
+      type: intervalType,
+      startingOn
+    }
   }
 }
 

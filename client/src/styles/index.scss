@@ -55,11 +55,18 @@ input, button, select, textarea {
 
 input {
 	background: none;
-	&[type=text] {
+	&[type=text], &[type=number], &[type=date] {
 		padding: 0.5rem;
-		border-bottom: 1px solid var(--accent-color);
+		border: 1px solid var(--accent-color);
 		color: var(--accent-color);
+/* 	}
+	&[type=text] { */
+		border-width: 0 0 1px;
 	}
+	/* &[type=number] {
+		background: #fff;
+		border-width: 1px;
+	} */
 }
 
 button, input[type=submit] {

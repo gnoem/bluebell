@@ -1,22 +1,19 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { Input } from "components";
 import { IManageListData } from "components/ManageList";
-import { IRecurringData } from "types";
-import { newObjectFrom } from "utils";
+import { IRecurringData, IRecurringInterval } from "types";
+import { createDropdownOptions, newObjectFrom } from "utils";
 import styles from "../ManageList.module.css";
 
-const weekOptionValues = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-const weekOptionDisplays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const recurringTypeOptions = createDropdownOptions(
+  ['daily', 'weekly', 'interval'],
+  ['Daily', 'Weekly', 'On an interval']
+);
 
-const recurringTypeOptions = [
-  { value: 'daily', display: 'Daily' },
-  { value: 'weekly', display: 'Weekly' },
-]
-
-const weekOptions = weekOptionValues.map((value, i) => ({
-  value,
-  display: weekOptionDisplays[i]
-}));
+const weekOptions = createDropdownOptions(
+  ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+);
 
 interface IManageRecurringProps {
   recurring: IRecurringData;
@@ -38,16 +35,16 @@ const ManageRecurring: React.FC<IManageRecurringProps> = (props): JSX.Element =>
   // update form data anytime recurring changes in local state
   useEffect(() => {
     const updateFormData = (value: IRecurringData): void => {
-      const convertToString = ({ isRecurring, type, onDays }: IRecurringData): string => {
+      const convertToString = ({ isRecurring, type, onDays, onInterval }: IRecurringData): string => {
         if (!isRecurring) return '';
-        return `${type}:${onDays.join('&')}`;
+        return `${type}:${onDays.join('&')}:${onInterval.every}&${onInterval.type}&${onInterval.startingOn}`;
       }
       props.setFormData(newObjectFrom<IManageListData>(formData => {
         formData.recurring = convertToString(value);
       }));
     }
     updateFormData(recurring);
-  }, [recurring.isRecurring, recurring.type, recurring.onDays]);
+  }, [recurring.isRecurring, recurring.type, recurring.onDays, recurring.onInterval]);
   
   return (
     <div>
@@ -75,6 +72,7 @@ const ManageRecurringType: React.FC<IRecurringOptionsProps> = ({ recurring, setR
         behavior={{ adjacent: true }}
       />
       {(recurring.type === 'weekly') && <ManageRecurringDays {...{ recurring, setRecurring }} />}
+      {(recurring.type === 'interval') && <ManageRecurringInterval {...{ recurring, setRecurring }} />}
     </div>
   )
 }
@@ -93,8 +91,7 @@ const ManageRecurringDays: React.FC<IRecurringOptionsProps> = ({ recurring, setR
     }));
   }
   return (
-    <div>
-      <p style={{ margin: '0.5rem 0 0.25rem' }}>Every:</p>
+    <div style={{ marginTop: '0.5rem' }}>
       {weekOptions.map(({ value, display }) => {
         return (
           <Input.Checkbox
@@ -107,6 +104,60 @@ const ManageRecurringDays: React.FC<IRecurringOptionsProps> = ({ recurring, setR
           />
         )
       })}
+    </div>
+  )
+}
+
+const intervalTypeOptions = createDropdownOptions(['days', 'weeks']);
+
+const calculateOptimalNumberInputWidth = (value: string) => {
+  const chPerCharacter = 2;
+  return `${value.length * chPerCharacter + 5}ch`;
+}
+
+const ManageRecurringInterval: React.FC<IRecurringOptionsProps> = ({ recurring, setRecurring }): JSX.Element => {
+  const { every, type, startingOn } = recurring.onInterval;
+  const handleChange = <Property extends keyof IRecurringInterval, Value extends IRecurringInterval[Property]>(property: Property, value: Value) => {
+    setRecurring(newObjectFrom<IRecurringData>(recurring => {
+      const recurringInterval: IRecurringInterval = {...recurring.onInterval};
+      recurringInterval[property] = value;
+      recurring.onInterval = recurringInterval;
+    }));
+  }
+  const setEvery = (e: ChangeEvent<HTMLInputElement>) => handleChange('every', e.target.value);
+  const setIntervalType = (value: string) => handleChange('type', value);
+  const setStartingOn = (e: ChangeEvent<HTMLInputElement>) => handleChange('startingOn', e.target.value);
+  return (
+    <div style={{ marginTop: '0.5rem' }}>
+      Every
+      <Input.Generic
+        style={{ display: 'inline-block', marginLeft: '0.425rem' }}
+        type="number"
+        name="intervalEvery"
+        defaultValue={every}
+        width={calculateOptimalNumberInputWidth(every)}
+        onChange={setEvery}
+        max="30"
+        min="0"
+        autoFocus
+      />
+      <Input.Dropdown
+        name="intervalType"
+        style={{ display: 'inline-block', marginLeft: '0.425rem' }}
+        dropdownOptions={intervalTypeOptions}
+        defaultOption={intervalTypeOptions.find(option => option.value === type)}
+        handleChange={setIntervalType}
+      />
+      <div style={{ marginTop: '0.5rem' }}>
+        starting on
+        <Input.Generic
+          style={{ display: 'inline-block', marginLeft: '0.425rem' }}
+          type="date"
+          name="intervalStartingOn"
+          defaultValue={startingOn}
+          onChange={setStartingOn}
+        />
+      </div>
     </div>
   )
 }

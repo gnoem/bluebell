@@ -38,16 +38,23 @@ export interface IListData extends Omit<IRawListData, 'members'> {
 
 export interface IInputProps {
   name: string;
-  label: string;
+  label?: string;
 }
 
-export interface IDropdownOption<T, K> {
+export interface IDropdownOption<T = string> {
   value: T;
-  display: K;
+  display: T;
+}
+
+export interface IRecurringInterval {
+  every: string;
+  type: string;
+  startingOn: string;
 }
 
 export interface IRecurringData {
   isRecurring: boolean;
   type: string;
   onDays: string[];
+  onInterval: IRecurringInterval
 }

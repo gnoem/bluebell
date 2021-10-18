@@ -56,12 +56,19 @@ input, button, select, textarea {
 
 input {
   background: none;
+  /* &[type=number] {
+		background: #fff;
+		border-width: 1px;
+	} */
 }
 
-input[type=text] {
+input[type=text], input[type=number], input[type=date] {
   padding: 0.5rem;
-  border-bottom: 1px solid var(--accent-color);
+  border: 1px solid var(--accent-color);
   color: var(--accent-color);
+  /* 	}
+	&[type=text] { */
+  border-width: 0 0 1px;
 }
 
 button, input[type=submit] {

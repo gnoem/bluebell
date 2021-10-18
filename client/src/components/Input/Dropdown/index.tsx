@@ -1,10 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { IDropdownOption } from "types";
 import styles from "./Dropdown.module.css";
-
-interface IDropdownOption {
-  value: string;
-  display: string;
-}
 
 interface IDropdownProps {
   dropdownOptions: IDropdownOption[];
@@ -13,12 +9,22 @@ interface IDropdownProps {
   label?: string;
   width?: string;
   handleChange: (value: string) => void;
+  style?: React.CSSProperties;
   behavior?: {
     adjacent?: boolean;
   }
 }
 
-const Dropdown: React.FC<IDropdownProps> = ({ name, label, dropdownOptions, defaultOption, handleChange, width, behavior }): JSX.Element => {
+const calculateOptimalDropdownWidth = (dropdownOptions: IDropdownOption[]) => {
+  const chPerCharacter = 1.5;
+  const getLongestStringsLength = (x: string[]) => Math.max(...(x.map(el => el.length)));
+  const displays = dropdownOptions.map(option => option.display);
+  // go through all displays and find the one that's longest
+  const longestDisplayLength = getLongestStringsLength(displays);
+  return `${Math.round(longestDisplayLength * chPerCharacter)}ch`;
+}
+
+const Dropdown: React.FC<IDropdownProps> = ({ name, label, dropdownOptions, defaultOption, handleChange, width, behavior, style }): JSX.Element => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
   const [selected, setSelected] = useState<IDropdownOption>(defaultOption ?? dropdownOptions[0]);
@@ -53,9 +59,9 @@ const Dropdown: React.FC<IDropdownProps> = ({ name, label, dropdownOptions, defa
   }, []);
 
   return (
-    <div ref={dropdownRef} className={`${styles.input} ${behavior?.adjacent ? styles.adjacent : ''}`}>
+    <div ref={dropdownRef} className={`${styles.input} ${behavior?.adjacent ? styles.adjacent : ''}`} style={style ?? {}}>
       {label && <label htmlFor={name}>{label}</label>}
-      <div className={`${styles.dropdown} ${expanded ? styles.opened : ''}`} style={{ width: width ?? '100%' }}>
+      <div className={`${styles.dropdown} ${expanded ? styles.opened : ''}`} style={{ width: width ?? calculateOptimalDropdownWidth(dropdownOptions) }}>
         <div className={styles.display} onClick={toggleExpanded}>{selected?.display}</div>
         <div className={styles.options}>
           {dropdownOptions.map(createDropdownOption)}
