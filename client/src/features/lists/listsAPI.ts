@@ -3,7 +3,7 @@ import { convertListItemsStringToArray, convertRecurringStringToObject } from "c
 import { IListData, IRawListData } from "types";
 
 export const fetchLists = async (): Promise<IListData[]> => {
-  const lists: IRawListData[] = await get('/lists');
+  const lists: IRawListData[] = await get<IRawListData[]>('/lists');
   lists.sort((a, b) => b.id - a.id);
   const formattedLists = lists.map(list => ({
     ...list,

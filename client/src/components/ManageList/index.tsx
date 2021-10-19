@@ -4,6 +4,7 @@ import ManageListItems from "./ManageListItems";
 import ManageRecurring from "./ManageRecurring";
 import styles from "./ManageList.module.css";
 import { defaultRecurringOptions, IManageListData, IManageListProps, convertListItemsArrayToString, convertRecurringObjectToString } from "./utils";
+import { put } from "api";
 
 /*
 JSON.stringify recurring and members on push/submit
@@ -35,9 +36,12 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
           members: convertListItemsArrayToString(formData.members),
           recurring: convertRecurringObjectToString(formData.recurring)
         }
-        console.log(data);
-        resolve();
-      }, 2000);
+        put(`/lists/${data.id}`, data).then(() => {
+          resolve();
+        }).catch(err => {
+          reject(err);
+        });
+      }, 1000);
     });
   }
 

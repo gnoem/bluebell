@@ -27,7 +27,7 @@ const Submit: React.FC<ISubmitProps> = ({ onClick, children }): JSX.Element => {
         if (mounted) setStatus('success');
       }).catch(err => {
         if (mounted) setStatus('idle');
-        console.error(err);
+        console.error(err); // todo error handling 
       });
     }
     if (status === 'success') {
