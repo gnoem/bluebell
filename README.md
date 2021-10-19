@@ -7,7 +7,8 @@ work in progress!
 ## todo
 
 - [ ] favicon etc
-- [ ] prettier imports
+- [x] prettier imports
 - [ ] loading icon
+- [ ] grab data on init
 - [ ] add documentation
 - [ ] user auth

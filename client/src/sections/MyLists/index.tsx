@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Icon, Section } from "components";
-import { loadListsAsync, selectLists } from "features/lists";
+import { selectLists } from "features/lists";
 import { goto } from "features/navigation";
 import { IListData, ISectionProps } from "types";
 import styles from "./MyLists.module.css";
@@ -9,10 +8,6 @@ import styles from "./MyLists.module.css";
 const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
   const lists = useAppSelector(selectLists);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadListsAsync());
-  }, [dispatch]);
 
   const createListButton = (data: IListData): JSX.Element => {
     const viewList = () => dispatch(goto({

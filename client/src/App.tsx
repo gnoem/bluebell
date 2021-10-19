@@ -1,13 +1,18 @@
-import { Counter } from './features/counter/Counter';
-import { Dashboard } from './components';
+import React, { useEffect } from "react";
+import { Dashboard } from "components";
+import { useAppDispatch } from "app/hooks";
+import { loadListsAsync } from "features/lists";
 
-function App() {
-  const counter = false;
+const App: React.FC = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadListsAsync());
+  }, []);
+
   return (
-    <>
-      {counter ? <Counter /> : <Dashboard />}
-    </>
-  );
+    <Dashboard />
+  )
 }
 
 export default App;

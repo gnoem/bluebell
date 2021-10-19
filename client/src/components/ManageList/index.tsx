@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useAppDispatch } from "app/hooks";
 import { Input } from "components";
+import { updateListAsync } from "features/lists";
+import { IListData } from "types";
+
+import styles from "./ManageList.module.css";
+import { defaultRecurringOptions, IManageListData, IManageListProps } from "./utils";
 import ManageListItems from "./ManageListItems";
 import ManageRecurring from "./ManageRecurring";
-import styles from "./ManageList.module.css";
-import { defaultRecurringOptions, IManageListData, IManageListProps, convertListItemsArrayToString, convertRecurringObjectToString } from "./utils";
-import { put } from "api";
 
 /*
 JSON.stringify recurring and members on push/submit
@@ -12,6 +15,8 @@ JSON.parse recurring and members on fetch
 */
 
 const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, members }): JSX.Element => {
+  const dispatch = useAppDispatch();
+  
   const creatingNew = !id;
   const [formData, setFormData] = useState<IManageListData>({
     user,
@@ -28,22 +33,8 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
     }));
   }
 
-  const handleSubmit = () => {
-    return new Promise<void>((resolve, reject) => {
-      setTimeout(() => {
-        const data = {
-          ...formData,
-          members: convertListItemsArrayToString(formData.members),
-          recurring: convertRecurringObjectToString(formData.recurring)
-        }
-        put(`/lists/${data.id}`, data).then(() => {
-          resolve();
-        }).catch(err => {
-          reject(err);
-        });
-      }, 1000);
-    });
-  }
+  const handleUpdateList = () => dispatch(updateListAsync(formData as IListData)).unwrap();
+  const handleCreateList = () => dispatch(updateListAsync(formData as IListData)).unwrap();
 
   return (
     <div className={styles.ListForm}>
@@ -67,7 +58,7 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
         setFormData={setFormData}
       />
       <div style={{ marginTop: '2.5rem' }}>
-        <Input.Submit onClick={handleSubmit}>Save changes</Input.Submit>
+        <Input.Submit onClick={creatingNew ? handleCreateList : handleUpdateList}>Save changes</Input.Submit>
       </div>
     </div>
   )

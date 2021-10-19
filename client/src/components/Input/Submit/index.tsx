@@ -10,21 +10,28 @@ interface ISubmitProps extends Omit<IButtonProps, 'onClick'> {
 type Status = 'pending' | 'success' | 'idle';
 
 const successAnimationDuration = 3000;
+const pendingAnimationCycleDuration = 1500; // flickering is ugly
+
+/**
+ * error handling thoughts
+ * maybe a little message under/next to the submit button that says "something went wrong and we weren't able to save your changes"
+ * and has a X button to get rid of it, and automatically disappears if you try to submit again 
+ */
 
 const Submit: React.FC<ISubmitProps> = ({ onClick, children }): JSX.Element => {
   const [status, setStatus] = useState<Status>('idle');
 
   const handleClick = () => {
-    if (status !== 'pending') {
-      setStatus('pending');
-    }
+    if (status !== 'pending') setStatus('pending');
   }
 
   useEffect(() => {
     let mounted = true;
     if (status === 'pending') {
       onClick().then(() => {
-        if (mounted) setStatus('success');
+        setTimeout(() => {
+          if (mounted) setStatus('success');
+        }, pendingAnimationCycleDuration);
       }).catch(err => {
         if (mounted) setStatus('idle');
         console.error(err); // todo error handling 
@@ -66,9 +73,9 @@ const Indicator: React.FC<IIndicatorProps> = ({ status }): JSX.Element => {
 const Pending: React.FC = (): JSX.Element => {
   return (
     <g className={styles.pending}>
-      <circle cx="15" cy="5" r="2"></circle>
-      <circle cx="20" cy="5" r="2"></circle>
-      <circle cx="25" cy="5" r="2"></circle>
+      <circle cx="15" cy="5" r="2" style={{ animationDuration: `${pendingAnimationCycleDuration}ms` }}></circle>
+      <circle cx="20" cy="5" r="2" style={{ animationDuration: `${pendingAnimationCycleDuration}ms` }}></circle>
+      <circle cx="25" cy="5" r="2" style={{ animationDuration: `${pendingAnimationCycleDuration}ms` }}></circle>
     </g>
   )
 }

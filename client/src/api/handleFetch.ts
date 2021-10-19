@@ -29,7 +29,7 @@ const handleFetch = <Method extends keyof IArguments, DataType extends IArgument
     if (response.ok) {
       return body;
     }
-    console.error(`${method} request to ${path} failed`);
+    console.error(`${method} request to ${path} failed!!`);
     throw new Error(body);
   }
 }
