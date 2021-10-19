@@ -1,7 +1,8 @@
+import { put } from "api";
 import { useAppSelector } from "app/hooks";
 import { Input, Section } from "components";
 import { selectLists } from "features/lists";
-import { IListData, ISectionProps } from "types";
+import { IListData, IRawListData, ISectionProps } from "types";
 
 const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
   const lists = useAppSelector(selectLists);
@@ -19,7 +20,7 @@ const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
         <li>Configure dashboard</li>
       </ul>
       <Input.Submit onClick={() => handleClick().then(console.log)}>
-        check lists store
+        Get lists
       </Input.Submit>
     </Section>
   )

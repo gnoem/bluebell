@@ -155,4 +155,9 @@ const ManageRecurringInterval: React.FC<IRecurringOptionsProps> = ({ recurring, 
   )
 }
 
+/**
+ * TODO!!!!!!!
+ * startingOn should always be TODAY if you open it up in the options section
+ */
+
 export default ManageRecurring;

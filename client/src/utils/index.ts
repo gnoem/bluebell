@@ -1,4 +1,5 @@
 import { IDropdownOption, Obj, Writeable } from "types";
+export * from "./lists";
 
 /**
  * Turns 1 into '01', 2 into '02', ... 9 into '09'
@@ -19,7 +20,7 @@ export const getDateString = (day: Date) => `${day.getFullYear()}-${getTwoDigitS
  * @param update what function to perform on the array
  * @returns setState callback function
  */
- export const newArrayFrom = <T extends unknown>(update: (array: T[]) => (T[] | void)) => (prevArray: T[]): T[] => {
+export const newArrayFrom = <T extends unknown>(update: (array: T[]) => (T[] | void)) => (prevArray: T[]): T[] => {
   let arrayToReturn = [...prevArray];
   const returnedValue = update(arrayToReturn); 
   /**
