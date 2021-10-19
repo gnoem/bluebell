@@ -1,8 +1,12 @@
+import React from "react";
+
 export type Obj<T = any> = Record<string | number, T>;
 
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+export type ReadonlyBy<T, K extends keyof T> = Omit<T, K> & Readonly<Pick<T, K>>;
 
 export type Writeable<T> = {
   -readonly [P in keyof T]: T[P];
@@ -17,10 +21,20 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
 type FlattenUnionHelper<T, TAll> = T extends any ? T & Partial<Record<Exclude<keyof TAll, keyof T>, undefined>> : never;
 export type FlattenUnion<T> = FlattenUnionHelper<T, UnionToIntersection<T>>;
 
+export interface IIconProps {
+  color?: string;
+  style?: any;
+}
+
+export interface ISectionHeaderButton {
+  Icon: React.FC<IIconProps>;
+  ariaLabel: string;
+  onClick: () => void;
+}
 
 export interface ISectionProps {
   title: string;
-  goBack?: () => void;
+  headerButtons?: ISectionHeaderButton[];
   data?: Obj;
 }
 

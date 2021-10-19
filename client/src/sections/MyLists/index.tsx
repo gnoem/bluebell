@@ -27,9 +27,18 @@ const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
       </li>
     )
   }
+
+  const headerButtons = [{
+    Icon: Icon.Plus,
+    ariaLabel: 'Add new list',
+    onClick: () => dispatch(goto({
+      componentName: 'ListForm',
+      sectionTitle: 'Create a new list'
+    }))
+  }];
   
   return (
-    <Section title={title}>
+    <Section title={title} headerButtons={headerButtons}>
       <ul className={styles.AllLists}>
         {!lists.length ? <i>Loading...</i> : lists.map(createListButton)}
       </ul>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { Input } from "components";
-import { updateListAsync } from "features/lists";
+import { createListAsync, updateListAsync } from "features/lists";
 import { IListData } from "types";
 
 import styles from "./ManageList.module.css";
@@ -19,7 +19,7 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
   
   const creatingNew = !id;
   const [formData, setFormData] = useState<IManageListData>({
-    user,
+    user: 2, //fixme
     id: id ?? null,
     name: name ?? '',
     recurring: recurring ?? defaultRecurringOptions,
@@ -34,7 +34,7 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
   }
 
   const handleUpdateList = () => dispatch(updateListAsync(formData as IListData)).unwrap();
-  const handleCreateList = () => dispatch(updateListAsync(formData as IListData)).unwrap();
+  const handleCreateList = () => dispatch(createListAsync(formData as IManageListData)).unwrap();
 
   return (
     <div className={styles.ListForm}>

@@ -8,13 +8,13 @@ interface IArguments<T = Obj> {
   DELETE: T;
 }
 
-const handleFetch = <Method extends keyof IArguments, DataType extends IArguments[Method]>(method: Method) => {
-  return async <ResultType>(
-    ...args: DataType extends IArguments['GET'] ? [
+const handleFetch = <Method extends keyof IArguments>(method: Method) => {
+  return async <ResultType, InputType = void>(
+    ...args: InputType extends IArguments<InputType>['GET'] ? [
       path: string
     ] : [
       path: string,
-      data: DataType
+      data: InputType
     ]
   ): Promise<ResultType> => {
     const [path, data] = [...args];

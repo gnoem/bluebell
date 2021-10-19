@@ -1,21 +1,26 @@
-import { Icon } from "components";
 import { ISectionProps } from "types";
 import styles from "./Section.module.css";
 
-const Section: React.FC<ISectionProps> = ({ title, goBack, children }): JSX.Element => {
+const Section: React.FC<ISectionProps> = ({ title, headerButtons, children }): JSX.Element => {
   return (
     <section className={styles.Section}>
-      <SectionHeader {...{ title, goBack }} />
+      <SectionHeader {...{ title, headerButtons }} />
       {children}
     </section>
   )
 }
 
-const SectionHeader: React.FC<ISectionProps> = ({ title, goBack }) => {
+const SectionHeader: React.FC<ISectionProps> = ({ title, headerButtons }) => {
   return (
     <div className={styles.Header}>
       <h2>{title}</h2>
-      {goBack && <button onClick={goBack}><Icon.ArrowLeft /></button>}
+      {headerButtons && (
+        <div className={styles.buttons}>
+          {headerButtons.map(({ Icon, ariaLabel, onClick }) => (
+            <button key={`button-${ariaLabel}`} aria-label={ariaLabel} onClick={onClick}><Icon /></button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

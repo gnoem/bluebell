@@ -1,11 +1,7 @@
 import React from "react";
+import { IIconProps } from "types";
 
-interface IIconOwnProps {
-  color?: string;
-  style?: any;
-}
-
-export const ArrowLeft: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const ArrowLeft: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -14,7 +10,7 @@ export const ArrowLeft: React.FC<IIconOwnProps> = ({ style, color }): JSX.Elemen
   )
 }
 
-export const ArrowRight: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const ArrowRight: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -23,7 +19,7 @@ export const ArrowRight: React.FC<IIconOwnProps> = ({ style, color }): JSX.Eleme
   )
 }
 
-export const Book: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Book: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -32,7 +28,7 @@ export const Book: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => 
   )
 }
 
-export const CaretRight: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const CaretRight: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -41,7 +37,7 @@ export const CaretRight: React.FC<IIconOwnProps> = ({ style, color }): JSX.Eleme
   )
 }
 
-export const Clock: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Clock: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -50,7 +46,7 @@ export const Clock: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =>
   )
 }
 
-export const Code: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Code: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -59,7 +55,7 @@ export const Code: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => 
   )
 }
 
-export const Codepen: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Codepen: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -68,7 +64,7 @@ export const Codepen: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element 
   )
 }
 
-export const Envelope: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Envelope: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -77,7 +73,7 @@ export const Envelope: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element
   )
 }
 
-export const ExternalLink: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const ExternalLink: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -86,7 +82,7 @@ export const ExternalLink: React.FC<IIconOwnProps> = ({ style, color }): JSX.Ele
   )
 }
 
-export const Github: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Github: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -95,7 +91,7 @@ export const Github: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =
   )
 }
 
-export const Home: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Home: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -104,7 +100,7 @@ export const Home: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => 
   )
 }
 
-export const Icons: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Icons: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -113,7 +109,7 @@ export const Icons: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =>
   )
 }
 
-export const Magic: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Magic: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -122,7 +118,7 @@ export const Magic: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =>
   )
 }
 
-export const Palette: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Palette: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -131,7 +127,7 @@ export const Palette: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element 
   )
 }
 
-export const Pen: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Pen: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -140,7 +136,7 @@ export const Pen: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
   )
 }
 
-export const Play: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Play: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -149,7 +145,16 @@ export const Play: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => 
   )
 }
 
-export const Pause: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Plus: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
+  return (
+    <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
+      <path fill={color} d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+    </svg>
+  )
+}
+
+export const Pause: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -158,7 +163,7 @@ export const Pause: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =>
   )
 }
 
-export const Question: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Question: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -167,7 +172,7 @@ export const Question: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element
   )
 }
 
-export const Seedling: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Seedling: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -176,7 +181,7 @@ export const Seedling: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element
   )
 }
 
-export const Times: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const Times: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -185,7 +190,7 @@ export const Times: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element =>
   )
 }
 
-export const WindowMaximize: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const WindowMaximize: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}
@@ -194,7 +199,7 @@ export const WindowMaximize: React.FC<IIconOwnProps> = ({ style, color }): JSX.E
   )
 }
 
-export const WindowMinimize: React.FC<IIconOwnProps> = ({ style, color }): JSX.Element => {
+export const WindowMinimize: React.FC<IIconProps> = ({ style, color }): JSX.Element => {
   return (
     <svg style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       {/* <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --> */}

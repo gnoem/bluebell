@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { WritableDraft } from "@reduxjs/toolkit/node_modules/immer/dist/internal";
 import { RootState } from "app/store";
 import { IListData } from "types";
-import { fetchLists, updateList } from "./listsAPI";
+import { createList, fetchLists, updateList } from "./listsAPI";
 
 export interface ListsState {
   value: IListData[];
@@ -24,6 +24,11 @@ export const updateListAsync = createAsyncThunk(
   updateList
 );
 
+export const createListAsync = createAsyncThunk(
+  'lists/createList',
+  createList
+);
+
 export const listsSlice = createSlice({
   name: 'lists',
   initialState,
@@ -43,6 +48,9 @@ export const listsSlice = createSlice({
         state.value = action.payload;
       })
       .addCase(updateListAsync.fulfilled, (state, { payload }) => {
+        state.value = updateStore(state.value, payload);
+      })
+      .addCase(createListAsync.fulfilled, (state, { payload }) => {
         state.value = updateStore(state.value, payload);
       });
   }

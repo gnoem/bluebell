@@ -12,7 +12,7 @@ export interface IManageListProps {
 }
 
 export interface IManageListData extends Omit<IListData, 'id'> {
-  id: number | null;
+  id: number | null; //todo convert to readonly
 }
 
 export const defaultIntervalOptions = {
