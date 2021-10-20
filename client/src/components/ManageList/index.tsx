@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "app/hooks";
-import { Input } from "components";
+import { Icon, Input } from "components";
 import { createListAsync, updateListAsync } from "features/lists";
 import { IListData } from "types";
 
@@ -8,13 +8,15 @@ import styles from "./ManageList.module.css";
 import { defaultRecurringOptions, IManageListData, IManageListProps } from "./utils";
 import ManageListItems from "./ManageListItems";
 import ManageRecurring from "./ManageRecurring";
+import { getModal, openModal } from "features/modal";
 
 /*
 JSON.stringify recurring and members on push/submit
 JSON.parse recurring and members on fetch
 */
 
-const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, members }): JSX.Element => {
+const ManageList: React.FC<IManageListProps> = (list): JSX.Element => {
+  const { user, id, name, recurring, members } = list;
   const dispatch = useAppDispatch();
   
   const creatingNew = !id;
@@ -35,6 +37,18 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
 
   const handleUpdateList = () => dispatch(updateListAsync(formData as IListData)).unwrap();
   const handleCreateList = () => dispatch(createListAsync(formData as IManageListData)).unwrap();
+
+  const confirmDeleteList = () => {
+    dispatch(openModal(getModal({
+      name: 'ConfirmDeleteList',
+      data: {
+        list: list as IListData,
+        confirm: () => {
+          console.log('hi')
+        }
+      }
+    })));
+  }
 
   return (
     <div className={styles.ListForm}>
@@ -59,6 +73,12 @@ const ManageList: React.FC<IManageListProps> = ({ user, id, name, recurring, mem
       />
       <div style={{ marginTop: '2.5rem' }}>
         <Input.Submit onClick={creatingNew ? handleCreateList : handleUpdateList}>Save changes</Input.Submit>
+        {!creatingNew && (
+          <button onClick={confirmDeleteList} style={{ display: 'flex', alignItems: 'flex-end', fontSize: '0.85rem', marginTop: '1rem' }}>
+            <Icon.Trash style={{ height: '1rem', marginRight: '0.5rem' }} />
+            <span>Delete this list</span>
+          </button>
+        )}
       </div>
     </div>
   )

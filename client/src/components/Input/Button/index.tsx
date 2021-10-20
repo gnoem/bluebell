@@ -1,9 +1,9 @@
 import { IButtonProps } from "types";
 import styles from "./Button.module.css";
 
-const Button: React.FC<IButtonProps> = ({ type, onClick, children }): JSX.Element => {
+const Button: React.FC<IButtonProps> = ({ type, className, onClick, children }): JSX.Element => {
   return (
-    <div className={styles.Button}>
+    <div className={`${styles.Button} ${className ?? ''}`}>
       <button type={type ?? 'button'} onClick={onClick}>
         {children}
       </button>

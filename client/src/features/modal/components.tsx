@@ -1,11 +1,20 @@
+import { useAppDispatch } from "app/hooks";
+import { Input } from "components";
 import React from "react";
 import { IListData } from "types";
+import { closeModal } from ".";
 
-export const ConfirmDeleteList: React.FC<PropsFor<'ConfirmDeleteList'>> = ({ list }) => {
+export const ConfirmDeleteList: React.FC<PropsFor<'ConfirmDeleteList'>> = ({ list, confirm }) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       <h2>Delete this list</h2>
       <p>Are you sure you want to delete the list <b>{list.name}</b>? This action cannot be undone!</p>
+      <Input.DialogOptions
+        confirm={() => new Promise(confirm)}
+        confirmText="Yes, I'm sure"
+        cancel={() => dispatch(closeModal())}
+      />
     </>
   )
 }
@@ -20,8 +29,13 @@ const ConfirmDeleteAccount: React.FC<PropsFor<'ConfirmDeleteAccount'>> = ({ user
 }
 
 export interface IModalProps {
-  ConfirmDeleteList: { list: IListData; };
-  ConfirmDeleteAccount: { user: IListData; };
+  ConfirmDeleteList: {
+    list: IListData;
+    confirm: () => any;
+  }
+  ConfirmDeleteAccount: {
+    user: IListData;
+  }
 }
 
 type ModalComponents<T = any> = {
@@ -35,6 +49,4 @@ const bank: ModalComponents = {
 
 export type PropsFor<T extends keyof IModalProps> = IModalProps[T];
 
-export const openModalComponent = <Name extends keyof ModalComponents, T extends React.FC<IModalProps[Name]>>(content: T): T => content;
-
-export const getComponent = <Name extends keyof ModalComponents>(name: Name): React.FC<IModalProps[Name]> => openModalComponent(bank[name]);
+export const getComponent = <Name extends keyof ModalComponents>(name: Name): React.FC<IModalProps[Name]> => bank[name];

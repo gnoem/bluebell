@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 export type Obj<T = any> = Record<string | number, T>;
 
@@ -23,7 +23,7 @@ export type FlattenUnion<T> = FlattenUnionHelper<T, UnionToIntersection<T>>;
 
 export interface IIconProps {
   color?: string;
-  style?: any;
+  style?: CSSProperties;
 }
 
 export interface ISectionHeaderButton {
@@ -76,7 +76,8 @@ export interface IRecurringData {
 
 export interface IButtonProps {
   type?: 'button' | 'submit';
-  onClick: () => void | Promise<any>;
+  className?: string;
+  onClick: () => any;
 }
 
 export interface IModalData {

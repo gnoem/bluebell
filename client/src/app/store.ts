@@ -11,6 +11,9 @@ export const store = configureStore({
     lists: listsReducer,
     modal: modalReducer
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  }),
 });
 
 export type AppDispatch = typeof store.dispatch;

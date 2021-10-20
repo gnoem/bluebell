@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { WritableDraft } from "@reduxjs/toolkit/node_modules/immer/dist/internal";
 import { RootState } from "app/store";
 import * as ComponentList from "./components";
 
@@ -14,10 +13,12 @@ export type ModalValue = IModalValue<ComponentName>;
 
 export interface ModalState {
   value: ModalValue | null;
+  status: 'idle' | 'goodbye';
 }
 
 const initialState: ModalState = {
   value: null,
+  status: 'idle'
 }
 
 /**
@@ -31,15 +32,21 @@ export const modalSlice = createSlice({
   reducers: {
     openModal: (state, action: PayloadAction<ModalValue>) => {
       state.value = action.payload;
+      state.status = 'idle';
     },
     closeModal: (state) => {
+      state.status = 'goodbye';
+    },
+    disposeModal: (state) => {
       state.value = null;
+      state.status = 'idle';
     }
   }
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, disposeModal } = modalSlice.actions;
 
 export const selectModal = (state: RootState) => state.modal.value;
+export const selectModalStatus = (state: RootState) => state.modal.status;
 
 export default modalSlice.reducer;

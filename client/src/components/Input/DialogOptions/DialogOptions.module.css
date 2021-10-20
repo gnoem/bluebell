@@ -1,0 +1,15 @@
+.DialogOptions {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.DialogOptions > * + * {
+  margin-left: 1rem;
+}
+
+.DialogOptions .cancel > button {
+  background: #999;
+}
+/*# sourceMappingURL=DialogOptions.module.css.map */

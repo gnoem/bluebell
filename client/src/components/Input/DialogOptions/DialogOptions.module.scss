@@ -1,0 +1,10 @@
+.DialogOptions {
+  margin-top: 1.5rem;
+  display: flex;
+  & > * + * {
+    margin-left: 1rem;
+  }
+  .cancel > button {
+    background: #999;
+  }
+}

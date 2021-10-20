@@ -1,35 +1,33 @@
-import { useAppDispatch } from "app/hooks";
-import { closeModal, ModalValue } from "features/modal";
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./Modal.module.css";
-import * as Component from "features/modal/components";
+import React, { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Icon } from "components";
-
-const modalTransitionDuration = 200;
+import { disposeModal, closeModal, ModalValue, selectModalStatus } from "features/modal";
+import * as Component from "features/modal/components";
+import styles from "./Modal.module.css";
 
 const Modal: React.FC<ModalValue> = ({ name, data }): JSX.Element => {
-  const [goodbye, setGoodbye] = useState<boolean>(false);
-  const modalBoxRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useAppDispatch();
-  
+  const status = useAppSelector(selectModalStatus);
+  const modalBoxRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    if (goodbye) {
+    if (status === 'goodbye') {
       setTimeout(() => {
-        dispatch(closeModal());
-      }, modalTransitionDuration);
+        dispatch(disposeModal());
+      }, 200);
     }
-  }, [goodbye]);
+  }, [status]);
 
   useEffect(() => {
     const checkIfClickedOutsideBox = (e: MouseEvent) => {
       if (!modalBoxRef.current) return;
       if (!modalBoxRef.current.contains(e.target as HTMLElement)) {
-        setGoodbye(true);
+        dispatch(closeModal());
       }
     }
     window.addEventListener('click', checkIfClickedOutsideBox);
     return () => {
-      setGoodbye(false);
+      dispatch(disposeModal());
       window.removeEventListener('click', checkIfClickedOutsideBox);
     }
   }, []);
@@ -37,9 +35,9 @@ const Modal: React.FC<ModalValue> = ({ name, data }): JSX.Element => {
   const Content = Component.getComponent(name);
 
   return (
-    <div className={`${styles.Modal} ${goodbye ? styles.goodbye : ''}`}>
+    <div className={`${styles.Modal} ${(status === 'goodbye') ? styles.goodbye : ''}`}>
       <div className={styles.Box} ref={modalBoxRef}>
-        <button onClick={() => setGoodbye(true)}><Icon.Times /></button>
+        <button onClick={() => dispatch(closeModal())}><Icon.Times /></button>
         <Content {...data} />
       </div>
     </div>

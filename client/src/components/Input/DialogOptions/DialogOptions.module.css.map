@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,IAAI;CAOd;;AATD,AAGE,cAHY,GAGR,CAAC,GAAG,CAAC,CAAC;EACR,WAAW,EAAE,IAAI;CAClB;;AALH,AAME,cANY,CAMZ,OAAO,GAAG,MAAM,CAAC;EACf,UAAU,EAAE,IAAI;CACjB",
+    "sources": [
+        "DialogOptions.module.scss"
+    ],
+    "names": [],
+    "file": "DialogOptions.module.css"
+}
