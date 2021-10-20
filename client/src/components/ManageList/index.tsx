@@ -15,7 +15,7 @@ JSON.stringify recurring and members on push/submit
 JSON.parse recurring and members on fetch
 */
 
-const ManageList: React.FC<IManageListProps> = (list): JSX.Element => {
+const ManageList: React.FC<Partial<IManageListProps>> = (list): JSX.Element => {
   const { user, id, name, recurring, members } = list;
   const dispatch = useAppDispatch();
   

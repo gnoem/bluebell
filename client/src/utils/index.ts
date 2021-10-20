@@ -1,3 +1,4 @@
+import { AppSections } from "config";
 import { IDropdownOption, Obj, Writeable } from "types";
 export * from "./lists";
 
@@ -53,3 +54,5 @@ export const createDropdownOptions = <T = string>(values: T[], displays: T[] = v
     display: displays[i]
   }));
 }
+
+export const getSection = <Name extends keyof AppSections>(name: Name, component: React.FC<AppSections[Name]>): React.FC<AppSections[Name]> => component;

@@ -1,24 +1,60 @@
-import { RequiredBy } from "types";
+import { IManageListProps } from "components/ManageList/utils";
+import { IIconProps, IListData, ISectionHeaderButton, Obj, PartialBy, RequiredBy } from "types";
+import * as Sections from "sections";
+import React from "react";
 
-export interface IAppSection {
+type StaticSectionNames = 'Dashboard' | 'MyLists' | 'Settings';
+export type DynamicSectionNames = 'ViewList' | 'ListForm';
+export type AllSectionNames = StaticSectionNames | DynamicSectionNames;
+
+export interface IGenericSection<Name extends AllSectionNames> {
   title?: string;
-  componentName: string;
+  componentName: Name;
+  data?: ISectionsProps[Name]['data'];
 }
 
-export const mainAppSections: RequiredBy<IAppSection, 'title'>[] = [
-  { title: 'Dashboard', componentName: 'Dashboard' },
-  { title: 'My lists', componentName: 'MyLists' },
-  { title: 'Settings', componentName: 'Settings' }
-]
+export type AppSection = IGenericSection<AllSectionNames>;
 
-export const subAppSections: IAppSection[] = [
-  { componentName: 'ViewList' },
-]
+export type AppSections = {
+  [Property in keyof ISectionsProps]: SectionProps<Property, ISectionsProps[Property]>;
+  /* [Property in keyof ISectionsProps]: Property extends DynamicSectionNames
+    ? ICustomSection<Property, NonNullable<ISectionsProps[Property]['data']>>
+    : SectionProps<Property> */
+}
 
-export const appSections: IAppSection[] = [
-  ...subAppSections,
-  ...mainAppSections
-]
+export interface ICustomSection<Name extends AllSectionNames, DataPropsType> extends Omit<IGenericSection<Name>, 'data'> {
+  data: DataPropsType;
+}
 
-export const getSectionByTitle = (title: string) => appSections.find(section => section.title === title);
-export const getSectionByComponentName = (componentName: string) => appSections.find(section => section.componentName === componentName);
+export type SectionProps<Name extends AllSectionNames, ExtraTypes = {}> = IGenericSection<Name> & ExtraTypes;
+
+export interface ISection {
+  Dashboard: IGenericSection<'Dashboard'>;
+  MyLists: IGenericSection<'MyLists'>;
+  ViewList: IGenericSection<'ViewList'>;
+  ListForm: IGenericSection<'ListForm'>;
+  Settings: IGenericSection<'Settings'>;
+}
+
+export interface ISectionsProps {
+  Dashboard: {
+    title: string;
+    data?: never;
+  }
+  MyLists: {
+    title: string;
+    data?: never;
+  }
+  ViewList: {
+    title: string;
+    data: IListData;
+  }
+  ListForm: {
+    title: string;
+    data: IManageListProps;
+  }
+  Settings: {
+    title: string;
+    data?: never;
+  }
+}

@@ -1,10 +1,10 @@
-import { put } from "api";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppSelector } from "app/hooks";
 import { Input, Section } from "components";
+import { getSection } from "utils";
 import { selectLists } from "features/lists";
-import { IListData, ISectionProps } from "types";
+import { IListData } from "types";
 
-const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
+const Dashboard = getSection('Dashboard', ({ title }): JSX.Element => {
   const lists = useAppSelector(selectLists);
 
   const handleClick = () => {
@@ -26,6 +26,6 @@ const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
       </div>
     </Section>
   )
-}
+});
 
 export default Dashboard;

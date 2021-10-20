@@ -1,6 +1,6 @@
 import { useAppDispatch } from "app/hooks";
 import { Nav } from "components";
-import { mainAppSections } from "config";
+import { mainAppSections } from "./config";
 import { goto } from "./navigationSlice";
 
 const SiteNav: React.FC = (): JSX.Element => {

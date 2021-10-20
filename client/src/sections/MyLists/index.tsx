@@ -1,25 +1,27 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Icon, Section } from "components";
 import { selectLists } from "features/lists";
-import { goto } from "features/navigation";
-import { IListData, ISectionProps } from "types";
+import { section, goto } from "features/navigation";
+import { IListData, ISectionHeaderButton } from "types";
+import { getSection } from "utils";
 import styles from "./MyLists.module.css";
 
-const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
+const MyLists = getSection('MyLists', ({ title }): JSX.Element => {
   const lists = useAppSelector(selectLists);
   const dispatch = useAppDispatch();
 
   const createListButton = (data: IListData): JSX.Element => {
-    const viewList = () => dispatch(goto({
-      componentName: 'ViewList',
-      sectionTitle: data.name,
+
+    const viewList = () => dispatch(goto(section('ViewList', {
+      title: data.name,
       data
-    }));
-    const editList = () => dispatch(goto({
-      componentName: 'ListForm',
-      sectionTitle: data.name,
+    })));
+
+    const editList = () => dispatch(goto(section('ListForm', {
+      title: data.name,
       data
-    }));
+    })));
+
     return (
       <li key={data.id}>
         <button onClick={viewList}>{data.name}</button>
@@ -28,13 +30,15 @@ const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
     )
   }
 
-  const headerButtons = [{
+  const headerButtons: ISectionHeaderButton[] = [{
     Icon: Icon.Plus,
     ariaLabel: 'Add new list',
-    onClick: () => dispatch(goto({
-      componentName: 'ListForm',
-      sectionTitle: 'Create a new list'
-    }))
+    onClick: () => dispatch(goto(section('ListForm', {
+      title: 'Create a new list',
+      data: {
+        user: 2
+      }
+    }))),
   }];
   
   return (
@@ -44,6 +48,6 @@ const MyLists: React.FC<ISectionProps> = ({ title }): JSX.Element => {
       </ul>
     </Section>
   )
-}
+});
 
 export default MyLists;

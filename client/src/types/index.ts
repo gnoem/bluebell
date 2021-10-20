@@ -17,15 +17,6 @@ export type Writeable<T> = {
  * https://stackoverflow.com/questions/51889715/require-at-least-one-of-two-properties-to-be-provided-in-props
  */
 
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
-type FlattenUnionHelper<T, TAll> = T extends any ? T & Partial<Record<Exclude<keyof TAll, keyof T>, undefined>> : never;
-export type FlattenUnion<T> = FlattenUnionHelper<T, UnionToIntersection<T>>;
-
-export interface IIconProps {
-  color?: string;
-  style?: CSSProperties;
-}
-
 export interface ISectionHeaderButton {
   Icon: React.FC<IIconProps>;
   ariaLabel: string;
@@ -35,7 +26,15 @@ export interface ISectionHeaderButton {
 export interface ISectionProps {
   title: string;
   headerButtons?: ISectionHeaderButton[];
-  data?: Obj;
+}
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
+type FlattenUnionHelper<T, TAll> = T extends any ? T & Partial<Record<Exclude<keyof TAll, keyof T>, undefined>> : never;
+export type FlattenUnion<T> = FlattenUnionHelper<T, UnionToIntersection<T>>;
+
+export interface IIconProps {
+  color?: string;
+  style?: CSSProperties;
 }
 
 export interface IRawListData {
