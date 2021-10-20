@@ -78,3 +78,7 @@ export interface IButtonProps {
   type?: 'button' | 'submit';
   onClick: () => void | Promise<any>;
 }
+
+export interface IModalData {
+  key: React.FC;
+}

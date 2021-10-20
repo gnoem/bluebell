@@ -1,16 +1,27 @@
 import { put } from "api";
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Input, Section } from "components";
 import { selectLists } from "features/lists";
-import { IListData, IRawListData, ISectionProps } from "types";
+import { openModal, getModal } from "features/modal";
+import { IListData, ISectionProps } from "types";
 
 const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
   const lists = useAppSelector(selectLists);
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     return new Promise<IListData[]>(resolve => {
       resolve(lists);
     });
+  }
+
+  const confirmDeleteList = () => {
+    dispatch(openModal(getModal({
+      name: 'ConfirmDeleteList',
+      data: {
+        list: lists[0]
+      }
+    })));
   }
 
   return (
@@ -19,9 +30,14 @@ const Dashboard: React.FC<ISectionProps> = ({ title }): JSX.Element => {
       <ul>
         <li>Configure dashboard</li>
       </ul>
-      <Input.Submit onClick={() => handleClick().then(console.log)}>
-        Get lists
-      </Input.Submit>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '1rem' }}>
+        <Input.Button onClick={confirmDeleteList}>
+          Open modal
+        </Input.Button>
+        <Input.Submit onClick={() => handleClick().then(console.log)}>
+          Get lists
+        </Input.Submit>
+      </div>
     </Section>
   )
 }
